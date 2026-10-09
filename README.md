@@ -50,4 +50,4 @@ The regular assessment totals 100%. The bonus is additional and may raise the fi
 
 ## Update rule
 
-Each week is a self-contained package. When a lecture is released, its `README.md`, PPTX, Colab, data, data dictionary, and assignment are added inside that week’s folder. Planned weeks already have navigation pages, so the student-facing links do not change and do not lead to 404 pages.
+Each week is a self-contained package. When a lecture is released, its `README.md`, PPTX, Colab, data, data dictionary, and assignment are added inside that week’s folder. 
