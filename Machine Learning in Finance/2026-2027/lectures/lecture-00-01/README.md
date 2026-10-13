@@ -13,7 +13,7 @@ This presentation introduces the 13-week course structure and begins the officia
 
 | Resource | Link |
 |---|---|
-| Latest editable PowerPoint | [Download the PPTX](slides/Lecture_00_01_Course_Orientation_and_Python_Foundations_2026-2027_EDITABLE_SAVE_SAFE_FINAL.pptx) |
+| Latest editable PowerPoint | [Download the PPTX](slides/Lecture_00_01_Course_Orientation_and_Python_Foundations_2026-2027.pptx) |
 | Google Colab notebook | [Open the Colab notebook](notebooks/lecture_00_01_colab.ipynb) |
 | Weekly assignment | [Read the assignment](assignment/README.md) |
 | Apple financial data | [Open the CSV](data/finance-charts-apple.csv) |
