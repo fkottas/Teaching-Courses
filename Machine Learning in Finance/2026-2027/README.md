@@ -11,10 +11,10 @@
 | 1 | [Course map and assessment](syllabus/13_week_course_map.md) |
 | 2 | [Lecture index](lectures/README.md) |
 | 3 | [Lecture 0–1 guide](lectures/lecture-00-01/README.md) |
-| 4 | [Datasets and provenance](datasets/README.md) |
-| 5 | [Weekly exercises](assignments/README.md) |
-| 6 | [Capstone project](project/README.md) |
-| 7 | [Mathematics and metrics reference](reference/README.md) |
+| 5 | [Datasets and provenance](datasets/README.md) |
+| 6 | [Weekly exercises](assignments/README.md) |
+| 7 | [Capstone project](project/README.md) |
+| 8 | [Mathematics and metrics reference](reference/README.md) |
 
 ## Assessment
 
@@ -29,4 +29,4 @@ Use Google Colab for the laboratories. Run notebooks from top to bottom, keep th
 
 ## Weekly status
 
-Lecture 0–1 is the current released package. The remaining weeks are mapped and will be released one complete lecture package at a time.
+Lecture 0–1 is published. Lecture 2 is available as a draft for review; its mathematics is intentionally supplied separately for manual insertion. The remaining weeks will be released one complete lecture package at a time.

@@ -1,3 +1,6 @@
-# Week 2 Colab laboratory
+# Lecture 2 notebooks
 
-The executed Google Colab notebook for **Python Foundations II: NumPy, Pandas, and EDA** will be published here after the lecture package passes execution checks. Status: planned.
+- [Colab notebook](lecture_02_numpy_pandas_eda.ipynb)
+- [Spyder/local Python script](lecture_02_numpy_pandas_eda.py)
+
+The notebook uses the canonical public CSV already stored in the Lecture 0–1 data folder and loads it through a raw GitHub URL.
