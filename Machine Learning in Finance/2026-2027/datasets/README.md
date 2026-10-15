@@ -1,16 +1,15 @@
-# Datasets and Provenance
+# Datasets and provenance
 
-Every dataset used in a lecture must be present in this repository or downloaded by a documented API/code cell. Students should not have to guess which file a slide refers to.
+Every dataset used in a lecture must be present in this repository or downloaded by a documented API or code cell. Students should not have to guess which file a slide refers to.
 
-## Lecture 0–1 datasets
+## Lecture 0–1 and Week 2 datasets
 
-| Dataset | Use | Source and documentation |
+| Dataset | Use | Access and documentation |
 |---|---|---|
-| `finance-charts-apple.csv` | Apple closing price, volume, descriptive statistics and plots | [Plotly datasets](https://github.com/plotly/datasets) |
-| `default_of_credit_card_clients.csv` | Introductory supervised credit-risk example | [UCI Machine Learning Repository, dataset 350](https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients) |
-| `default of credit card clients.xls` | Original UCI workbook supplied with the converted CSV | UCI dataset 350; see the data dictionary |
+| default_of_credit_card_clients.csv.gz | Complete 30,000-row credit-risk dataset used for EDA and later supervised learning | [Course data guide](../lectures/lecture-00-01/data/README.md) · [UCI dataset 350](https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients) |
+| finance-charts-apple.csv | Apple closing price, volume, descriptive statistics, and plots | [Plotly datasets](https://github.com/plotly/datasets) |
 
-The complete definitions, units, coding, target variable and licence/provenance notes are in the [Lecture 0–1 data dictionary](../lectures/lecture-00-01/data/data_dictionary.md).
+The complete definitions, units, coding, target variable, and licence/provenance notes are in the [Lecture 0–1 data dictionary](../lectures/lecture-00-01/data/data_dictionary.md) and the [Week 2 data guide](../lectures/week-02/data/README.md).
 
 ## Student rule
 
