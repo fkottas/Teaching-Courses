@@ -4,7 +4,7 @@ This page contains the equations for the final Lecture 2 deck. The equations are
 
 The PowerPoint deck intentionally contains no equation objects. Add these equations manually to the corresponding slides as editable PowerPoint equations.
 
-Compatibility rule: the formulas below do not use \operatorname, \left, or \right. Use \mathrm{Cov} for covariance.
+Compatibility rule: the formulas use standard fractions, superscripts, subscripts, and delimiters only. Covariance is written with the conventional notation Cov inside the formula.
 
 ## Slide 9 — One-period simple return
 
