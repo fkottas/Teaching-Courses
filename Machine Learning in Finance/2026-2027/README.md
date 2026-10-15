@@ -11,10 +11,10 @@
 | 1 | [Course map and assessment](syllabus/13_week_course_map.md) |
 | 2 | [Lecture index](lectures/README.md) |
 | 3 | [Lecture 0–1 guide](lectures/lecture-00-01/README.md) |
-| 5 | [Datasets and provenance](datasets/README.md) |
-| 6 | [Weekly exercises](assignments/README.md) |
-| 7 | [Capstone project](project/README.md) |
-| 8 | [Mathematics and metrics reference](reference/README.md) |
+| 4 | [Datasets and provenance](datasets/README.md) |
+| 5 | [Weekly exercises](assignments/README.md) |
+| 6 | [Capstone project](project/README.md) |
+| 7 | [Mathematics and metrics reference](reference/README.md) |
 
 ## Assessment
 
@@ -29,4 +29,4 @@ Use Google Colab for the laboratories. Run notebooks from top to bottom, keep th
 
 ## Weekly status
 
-Lecture 0–1 and Lecture 2 are published. Lecture 2 includes the editable PPTX, executed Colab notebook, open-data guide, assignment, and separately rendered mathematics guide. The remaining weeks will be released one complete lecture package at a time.
+Lecture 0–1 and Lecture 2 are published. Lecture 2 includes the editable PPTX, executed Colab notebook, complete UCI dataset, open-data guide, assignment, and separately rendered mathematics guide. The remaining weeks will be released one complete lecture package at a time.
