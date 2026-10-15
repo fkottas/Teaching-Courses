@@ -1,8 +1,9 @@
 # Week 2 — Python Foundations II: NumPy, Pandas, and exploratory data analysis
 
 **Teaching date:** 21 October 2026  
+**Release date:** 15 October 2026  
 **Time:** 15:00–18:00 Greece time (Europe/Athens)  
-**Status:** Draft for review
+**Status:** Published
 
 ## Student route
 
