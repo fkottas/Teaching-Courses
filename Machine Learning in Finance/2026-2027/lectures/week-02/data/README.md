@@ -1,6 +1,6 @@
 # Lecture 2 data guide
 
-The notebook uses the complete 30,000-row UCI Default of Credit Card Clients dataset in compressed CSV form. The course copy is stored at [default_of_credit_card_clients.csv.gz](../../lectures/lecture-00-01/data/credit/default_of_credit_card_clients.csv.gz). This week does not create a second dataset copy.
+The notebook uses the complete 30,000-row UCI Default of Credit Card Clients dataset in compressed CSV form. The course copy is stored at [default_of_credit_card_clients.csv.gz](../../lecture-00-01/data/credit/default_of_credit_card_clients.csv.gz). This week does not create a second dataset copy.
 
 Source: UCI Machine Learning Repository dataset 350
 URL: https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients
