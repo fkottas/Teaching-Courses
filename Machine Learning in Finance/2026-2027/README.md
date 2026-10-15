@@ -29,4 +29,4 @@ Use Google Colab for the laboratories. Run notebooks from top to bottom, keep th
 
 ## Weekly status
 
-Lecture 0–1 is published. Lecture 2 is available as a draft for review; its mathematics is intentionally supplied separately for manual insertion. The remaining weeks will be released one complete lecture package at a time.
+Lecture 0–1 and Lecture 2 are published. Lecture 2 includes the editable PPTX, executed Colab notebook, open-data guide, assignment, and separately rendered mathematics guide. The remaining weeks will be released one complete lecture package at a time.
