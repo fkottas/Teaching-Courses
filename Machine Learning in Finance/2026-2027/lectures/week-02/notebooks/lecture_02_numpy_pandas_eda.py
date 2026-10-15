@@ -2,8 +2,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-DATA_URL = 'https://raw.githubusercontent.com/fkottas/Teaching-Courses/main/Machine%20Learning%20in%20Finance/2026-2027/lectures/lecture-00-01/data/credit/default_of_credit_card_clients.csv'
-credit = pd.read_csv(DATA_URL).rename(columns={"default payment next month": "default_next_month"})
+DATA_URL = 'https://raw.githubusercontent.com/fkottas/Teaching-Courses/main/Machine%20Learning%20in%20Finance/2026-2027/lectures/lecture-00-01/data/credit/default_of_credit_card_clients.csv.gz'
+credit = pd.read_csv(DATA_URL, compression='gzip').rename(columns={"default payment next month": "default_next_month"})
 print(credit.shape)
 print(credit.isna().sum().sum())
 print(credit["default_next_month"].value_counts())
