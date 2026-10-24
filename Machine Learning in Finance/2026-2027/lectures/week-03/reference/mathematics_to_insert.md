@@ -1,6 +1,6 @@
 # Mathematics to insert — Week 3
 
-The presentation intentionally keeps equations in this separate reference so that the deck remains editable and the equations can be reviewed before insertion. The blocks below use standard LaTeX without `\operatorname`, `\left`, `\right`, or unmatched delimiters.
+The presentation intentionally keeps equations in this separate reference so that the deck remains editable and the equations can be reviewed before insertion. The blocks below use standard LaTeX without unsupported operator macros, delimiter-sizing commands, or unmatched delimiters.
 
 ## Slide 13 — Missingness rate
 
