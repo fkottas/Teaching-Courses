@@ -6,7 +6,7 @@ This is the complete Week 3 package for **Machine Learning in Finance** (NKUA MP
 
 | Resource | Purpose |
 |---|---|
-| [Lecture presentation](slides/Lecture_03_Data_Cleaning_and_Preprocessing_2026-2027.pptx) | Editable lecture deck with native text, tables, charts, and code examples |
+| [Lecture presentation](slides/Lecture_03_Data_Cleaning_and_Preprocessing_2026-2027.pptx) | Editable 68-slide lecture deck with native text, tables, charts, code examples, and worked cases |
 | [Colab notebook](notebooks/lecture_03_data_cleaning_preprocessing.ipynb) | Executable student lab with visible outputs |
 | [Local Python script](notebooks/lecture_03_data_cleaning_preprocessing.py) | Same workflow for Spyder or a local environment |
 | [Data guide](data/README.md) | Source, access path, observation unit, variables, and modelling roles |
@@ -16,6 +16,8 @@ This is the complete Week 3 package for **Machine Learning in Finance** (NKUA MP
 ## Learning focus
 
 The lecture follows the supervised-learning route in the syllabus. It covers data-quality auditing, missing values, duplicates, outliers, categorical encoding, numeric scaling, train/test separation, leakage prevention, `ColumnTransformer`, and `Pipeline`. No unsupervised-learning model is used.
+
+The expanded worked cases cover missing income with an indicator, duplicate transactions, an IQR outlier flag, an unseen categorical value, leakage from fitting on all rows, and the complete UCI preprocessing pipeline.
 
 ## Data rule
 
