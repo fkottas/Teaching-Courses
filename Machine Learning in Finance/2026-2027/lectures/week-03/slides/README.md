@@ -1,5 +1,9 @@
 # Week 3 presentation
 
-The editable deck for **Data cleaning and preprocessing** is [Lecture_03_Data_Cleaning_and_Preprocessing_2026-2027.pptx](Lecture_03_Data_Cleaning_and_Preprocessing_2026-2027.pptx).
+The authoritative file in this folder is the single editable PowerPoint deck:
 
-It contains 72 slides with native editable text, tables, charts, code examples, visible outputs, worked cases, and three public-license internet visuals on slides 70–72. The visual source register is [visual_sources.md](../reference/visual_sources.md). Equations remain in the separate mathematics reference for review before insertion.
+[Lecture 3 — Data Cleaning and Preprocessing](Lecture_03_Data_Cleaning_and_Preprocessing_2026-2027.pptx)
+
+It contains 78 slides. The opening section explains the data journey before the code: business events, ETL/ELT, OLTP/OLAP, warehouses, data lakes, lakehouses, governance, and train/validation/test separation. The later sections contain the Week 3 theory, runnable code examples, outputs, and worked financial cases.
+
+The deck uses native editable text, tables, charts, and diagrams. Internet-sourced visuals are embedded in the deck and documented in [`reference/visual_sources.md`](../reference/visual_sources.md).
