@@ -6,7 +6,7 @@ Use this page as the weekly release board. Every week has a stable page; planned
 |---:|---|---|---|---|
 | 0 + 1 | Course orientation, Python Foundations I, descriptive statistics, first financial data analysis | 14 October 2026 | **Published** | [Open Lecture 0 + 1](lecture-00-01/README.md) |
 | 2 | Python Foundations II: NumPy, Pandas, and EDA | 21 October 2026 | **Published · 15 October 2026** | [Open Week 2](week-02/README.md) |
-| 3 | Data cleaning and preprocessing | — | Planned | [Open Week 3](week-03/README.md) |
+| 3 | Data cleaning and preprocessing | 28 October 2026 · subject to official timetable | **Published · 24 October 2026** | [Open Week 3](week-03/README.md) |
 | 4 | Feature engineering for financial data | — | Planned | [Open Week 4](week-04/README.md) |
 | 5 | Logistic regression for credit risk | — | Planned | [Open Week 5](week-05/README.md) |
 | 6 | ML and financial performance metrics | — | Planned | [Open Week 6](week-06/README.md) |
