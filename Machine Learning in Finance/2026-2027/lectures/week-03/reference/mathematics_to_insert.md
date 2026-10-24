@@ -77,6 +77,6 @@ T(x) = T_{\mathrm{cat}}(x_{\mathrm{cat}}) \oplus T_{\mathrm{num}}(x_{\mathrm{num
 
 - Keep every equation in a math-capable text box or in the lecture reference, not as a screenshot.
 - Render each equation before publishing and check subscripts, superscripts, Greek letters, minus signs, and delimiters.
-- Do not use `\operatorname`, `\left`, or `\right` in the GitHub math guide because they have caused rendering failures in this repository.
+- Avoid unsupported operator declarations and delimiter-sizing commands in the GitHub math guide because they have caused rendering failures in this repository.
 - The mathematical notation must agree with the code: the notebook uses training-only imputation and scaling, and the visible outlier chart uses percentile thresholds.
 
