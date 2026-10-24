@@ -65,6 +65,51 @@ def main():
     duplicate_demo = pd.concat([credit.head(5), credit.head(1)], ignore_index=True)
     print("\ncontrolled duplicate count:", int(duplicate_demo.duplicated().sum()))
 
+    # Worked case A: imputation plus an indicator.
+    case_a = pd.DataFrame(
+        {
+            "borrower": ["A", "B", "C", "D", "E"],
+            "income": [42000.0, np.nan, 58000.0, np.nan, 72000.0],
+        }
+    )
+    case_a["income_was_missing"] = case_a["income"].isna().astype(int)
+    median_income = case_a["income"].median()
+    case_a["income"] = case_a["income"].fillna(median_income)
+    print("\nworked case A median income:", median_income)
+    print(case_a.to_string(index=False))
+
+    # Worked case B: exact row and repeated identifier checks.
+    transactions = pd.DataFrame(
+        {
+            "transaction_id": [101, 102, 102, 103],
+            "amount": [120, 75, 75, 240],
+            "merchant": ["A", "B", "B", "C"],
+        }
+    )
+    print("\nworked case B exact rows:", int(transactions.duplicated().sum()))
+    print("worked case B repeated IDs:", int(transactions["transaction_id"].duplicated().sum()))
+
+    # Worked case C: an IQR flag creates a review list.
+    payments = pd.DataFrame({"amount": [800, 950, 1100, 1300, 1500, 1600, 180000]})
+    q1 = payments["amount"].quantile(0.25)
+    q3 = payments["amount"].quantile(0.75)
+    upper_fence = q3 + 1.5 * (q3 - q1)
+    payments["outlier_flag"] = payments["amount"] > upper_fence
+    print("\nworked case C upper fence:", upper_fence)
+    print("worked case C flagged rows:", int(payments["outlier_flag"].sum()))
+
+    # Worked case D: an unseen category is handled without changing the layout.
+    encoder = make_encoder()
+    encoder.fit(pd.DataFrame({"channel": ["branch", "web"]}))
+    print("\nworked case D feature names:", encoder.get_feature_names_out().tolist())
+    print("worked case D mobile:", encoder.transform(pd.DataFrame({"channel": ["mobile"]})).tolist())
+
+    # Worked case E: fitting on all rows leaks future information.
+    train_demo = np.array([10.0, 20.0, 30.0])
+    test_demo = np.array([1000.0])
+    print("\nworked case E full-sample mean:", np.concatenate([train_demo, test_demo]).mean())
+    print("worked case E training-only mean:", train_demo.mean())
+
     # Documented percentile flag: flag for review; do not delete automatically.
     lower, upper = credit["LIMIT_BAL"].quantile([0.01, 0.99])
     limit_flag = ~credit["LIMIT_BAL"].between(lower, upper)
