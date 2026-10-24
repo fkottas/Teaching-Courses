@@ -6,7 +6,7 @@ This is the complete Week 3 package for **Machine Learning in Finance** (NKUA MP
 
 | Resource | Purpose |
 |---|---|
-| [Lecture presentation](slides/Lecture_03_Data_Cleaning_and_Preprocessing_2026-2027.pptx) | Editable 68-slide lecture deck with native text, tables, charts, code examples, and worked cases |
+| [Lecture presentation](slides/Lecture_03_Data_Cleaning_and_Preprocessing_2026-2027.pptx) | Editable 72-slide lecture deck with native text, tables, charts, code examples, worked cases, and public-license visuals |
 | [Colab notebook](notebooks/lecture_03_data_cleaning_preprocessing.ipynb) | Executable student lab with visible outputs |
 | [Local Python script](notebooks/lecture_03_data_cleaning_preprocessing.py) | Same workflow for Spyder or a local environment |
 | [Data guide](data/README.md) | Source, access path, observation unit, variables, and modelling roles |
