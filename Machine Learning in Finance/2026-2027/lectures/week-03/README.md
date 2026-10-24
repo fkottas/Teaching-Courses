@@ -12,6 +12,7 @@ This is the complete Week 3 package for **Machine Learning in Finance** (NKUA MP
 | [Data guide](data/README.md) | Source, access path, observation unit, variables, and modelling roles |
 | [Weekly assignment](assignment/README.md) | Required notebook evidence and submission checklist |
 | [Mathematics to insert](reference/mathematics_to_insert.md) | Render-safe equations, slide locations, and explanations |
+| [Visual sources](reference/visual_sources.md) | Public-license internet visuals embedded in slides 70–72 |
 
 ## Learning focus
 
