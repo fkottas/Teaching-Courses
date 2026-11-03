@@ -1,6 +1,6 @@
 # Week 4 mathematics reference
 
-The presentation uses editable native text for these equations. This reference uses Unicode/plain text deliberately: it does not use the LaTeX macros left, right, operatorname, or unsupported delimiter macros.
+The presentation uses editable native text for these equations. This reference uses Unicode/plain text deliberately so the equations remain readable in GitHub and PowerPoint.
 
 ## Formula locations in the 90-slide deck
 
