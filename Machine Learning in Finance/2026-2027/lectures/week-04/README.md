@@ -11,7 +11,7 @@
 
 | Resource | Purpose | Link |
 |---|---|---|
-| Lecture presentation | 109-slide editable lecture deck with theory, worked cases, plots, code, and analytical speaker notes | [Open the PPTX](slides/Lecture_04_Feature_Engineering_for_Financial_Data_2026-2027.pptx) |
+| Lecture presentation | 90-slide editable lecture deck with theory, worked cases, plots, code, scorecard methods, and analytical speaker notes | [Open the PPTX](slides/Lecture_04_Feature_Engineering_for_Financial_Data_2026-2027.pptx) |
 | Colab notebook | Reproducible feature-engineering lab using the real UCI credit-default data | [Open the notebook](notebooks/lecture_04_feature_engineering_finance.ipynb) |
 | Python script | Same lab as a plain `.py` file for inspection or local execution | [Open the script](notebooks/lecture_04_feature_engineering_finance.py) |
 | Dataset guide | Source, observation unit, target, raw fields, derived fields, and limitations | [Read the data guide](data/README.md) |
