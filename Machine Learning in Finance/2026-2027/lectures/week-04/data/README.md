@@ -53,6 +53,8 @@ The source includes `PAY_0` and then `PAY_2` through `PAY_6`; the absence of `PA
 | `payment_change_1m` | `PAY_AMT1 − PAY_AMT2` | Recent change in payment amount | Direction is retained |
 | `log_limit` | `log(1 + LIMIT_BAL)` | Compressed credit-limit scale | Transformation is fit/applied without using the target |
 
+The file `feature_correlation_matrix.json` contains the pairwise correlation matrix for the selected engineered variables used in the correlation and cluster slides. It is calculated from the complete UCI source after the documented feature construction.
+
 ## Data-quality checks required in the lab
 
 Check column types, duplicate IDs, missing values, zero denominators, infinite ratios, negative or impossible amounts, status-code ranges, target balance, and the number of rows affected by every policy. A feature should not be considered complete until its data-quality policy is written down.
