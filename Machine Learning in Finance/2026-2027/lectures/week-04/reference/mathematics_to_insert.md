@@ -24,7 +24,7 @@ The presentation uses editable native text for these equations. This reference u
 | 65 | Lookback utilization | utilizationᵢ,ₜ = BILL_AMTᵢ,ₜ / LIMIT_BALᵢ |
 | 67 | PSI contribution | PSIⱼ = (qⱼ − pⱼ) × ln(qⱼ / pⱼ), and PSI = Σⱼ PSIⱼ |
 | 68 | PSI code | The code implements the same bin-level sum with a small epsilon for zero shares |
-| 83 | Gini impurity | G(t) = 1 − [p₀|t² + p₁|t²] |
+| 83 | Gini impurity | G(t) = 1 − [(p₀|t)² + (p₁|t)²] |
 | 84 | Worked WOE | WOEⱼ = ln(GoodShareⱼ / BadShareⱼ) |
 | 85 | Worked Information Value | IV = Σⱼ (GoodShareⱼ − BadShareⱼ) × WOEⱼ |
 | 87 | Model Gini | Gini = 2 × AUC − 1 |
