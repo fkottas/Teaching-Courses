@@ -13,7 +13,7 @@ The deck is an editable PowerPoint file. Text, tables, charts, code examples, an
 - interactions and nonlinear representations;
 - data-driven events versus target-driven events;
 - filter, wrapper, embedded, and stability-based feature selection;
-- distribution, relationship, and operational feature stability, including real UCI lookback plots and monthly monitoring plots from an open LendingClub extract;
+- distribution, relationship, and operational feature stability, including the UCI lookback limitation and monthly monitoring plots from an open LendingClub extract;
 - monthly fixed-bin distributions for revolving utilisation, monthly categorical shares for grade, and a target default-rate time series with the resolved-loan denominator;
 - a worked PSI calculation with bin-level contributions and a clear distinction between variable PSI and delayed target PSI;
 - scorecard binning, decision-tree cut points, an official scikit-learn tree-structure figure, WOE, Information Value, Information Coefficient, and the distinct meanings of Gini;
