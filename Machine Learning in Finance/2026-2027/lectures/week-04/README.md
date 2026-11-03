@@ -15,6 +15,7 @@
 | Colab notebook | Reproducible feature-engineering lab using the real UCI credit-default data | [Open the notebook](notebooks/lecture_04_feature_engineering_finance.ipynb) |
 | Python script | Same lab as a plain `.py` file for inspection or local execution | [Open the script](notebooks/lecture_04_feature_engineering_finance.py) |
 | Dataset guide | Source, observation unit, target, raw fields, derived fields, and limitations | [Read the data guide](data/README.md) |
+| Lookback stability summary | Real UCI six-step input-history summaries used for the time-series plots | [Open JSON](data/lookback_stability_summary.json) |
 | Derived teaching sample | 1,000 rows derived from the complete UCI data; useful for quick inspection | [Download CSV](data/credit_feature_engineering_sample.csv) |
 | Feature dictionary | Compact field-by-field definition for the derived sample | [Read the dictionary](reference/feature_dictionary.md) |
 | Mathematics reference | Editable, plain-text formulas and the slide locations where they belong | [Read the mathematics reference](reference/mathematics_to_insert.md) |

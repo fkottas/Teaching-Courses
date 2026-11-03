@@ -152,7 +152,110 @@ plt.show()
 
 
 # %% [markdown]
-# # 5. Interaction: a combined financial state
+# # 5. Time-indexed lookback stability
+#
+# The six BILL_AMT, PAY_AMT, and repayment-status columns encode a lookback history for each client. We reverse the published column order so that t−5 is the oldest encoded month and t is the reporting snapshot. These plots show how the engineered inputs change through the available history.
+#
+# This is a real time-indexed lookback profile from the UCI source. It is not a production calendar-period drift study: the published file does not contain observation dates or a panel of later cohorts.
+#
+#
+
+# %%
+lookback_labels = ['t−5', 't−4', 't−3', 't−2', 't−1', 't']
+lookback_bill_cols = [f'BILL_AMT{i}' for i in range(6, 0, -1)]
+lookback_payment_cols = [f'PAY_AMT{i}' for i in range(6, 0, -1)]
+lookback_status_cols = ['PAY_6', 'PAY_5', 'PAY_4', 'PAY_3', 'PAY_2', 'PAY_0']
+safe_limit = credit['LIMIT_BAL'].replace(0, np.nan)
+
+lookback_summary = pd.DataFrame({
+    'period': lookback_labels,
+    'mean_bill': [credit[col].mean() for col in lookback_bill_cols],
+    'mean_payment': [credit[col].mean() for col in lookback_payment_cols],
+    'mean_utilization': [
+        credit[col].div(safe_limit).mean() for col in lookback_bill_cols
+    ],
+    'overdue_rate': [
+        (credit[col] > 0).mean() for col in lookback_status_cols
+    ],
+})
+lookback_summary
+
+
+# %%
+fig, axes = plt.subplots(1, 3, figsize=(17, 4.5))
+
+axes[0].plot(
+    lookback_summary['period'],
+    lookback_summary['mean_bill'],
+    marker='o',
+    linewidth=2.5,
+    color='#159A9C',
+)
+axes[0].set_title('Mean bill amount')
+axes[0].set_ylabel('Source currency units')
+
+axes[1].plot(
+    lookback_summary['period'],
+    lookback_summary['mean_utilization'],
+    marker='o',
+    linewidth=2.5,
+    color='#D66F61',
+)
+axes[1].set_title('Mean utilization')
+axes[1].set_ylabel('Bill amount / credit limit')
+
+axes[2].plot(
+    lookback_summary['period'],
+    lookback_summary['overdue_rate'],
+    marker='o',
+    linewidth=2.5,
+    color='#C58F32',
+)
+axes[2].set_title('Share with positive repayment status')
+axes[2].set_ylabel('Share of accounts')
+
+for axis in axes:
+    axis.set_xlabel('Encoded lookback period')
+    axis.grid(alpha=0.25)
+
+fig.suptitle('Real UCI six-month lookback profiles', y=1.04, fontsize=15)
+plt.tight_layout()
+plt.show()
+
+
+# %% [markdown]
+# # 6. A PSI comparison across the encoded lookback
+#
+# The same fixed bins can compare an older encoded month with the reporting snapshot. This demonstrates the mechanics of variable PSI using observed UCI inputs. It should not be described as production drift because the source has no calendar dates.
+#
+#
+
+# %%
+def psi_from_series(reference, monitoring, bins):
+    reference_share = pd.cut(
+        reference, bins=bins, include_lowest=True
+    ).value_counts(normalize=True, sort=False)
+    monitoring_share = pd.cut(
+        monitoring, bins=bins, include_lowest=True
+    ).value_counts(normalize=True, sort=False)
+    epsilon = 1e-6
+    return (
+        (monitoring_share + epsilon - reference_share - epsilon)
+        * np.log((monitoring_share + epsilon) / (reference_share + epsilon))
+    ).sum()
+
+utilization_oldest = credit['BILL_AMT6'].div(safe_limit)
+utilization_snapshot = credit['BILL_AMT1'].div(safe_limit)
+utilization_bins = [-np.inf, 0.25, 0.50, 0.80, 1.00, np.inf]
+
+print(
+    'Variable PSI: oldest encoded month vs snapshot =',
+    f'{psi_from_series(utilization_oldest, utilization_snapshot, utilization_bins):.4f}'
+)
+
+
+# %% [markdown]
+# # 7. Interaction: a combined financial state
 #
 # An interaction preserves a joint condition. Keep the component variables because the combined state should not hide whether the signal came from utilisation, recency, or both.
 #
@@ -167,7 +270,7 @@ interaction_result
 
 
 # %% [markdown]
-# # 6. Leakage demonstration
+# # 8. Leakage demonstration
 #
 # This toy example shows why a random full-sample quantile is not the correct threshold when the threshold is meant to be learned from training data. The safe threshold is estimated from training rows and then applied unchanged to held-out rows.
 #
@@ -185,7 +288,7 @@ print('The safe threshold is fitted on training rows only.')
 
 
 # %% [markdown]
-# # 7. Export a small derived teaching sample
+# # 9. Export a small derived teaching sample
 #
 # The repository sample is only for quick inspection. For analysis, use the complete canonical source downloaded above.
 #

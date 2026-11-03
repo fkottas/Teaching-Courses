@@ -13,7 +13,8 @@ The deck is an editable PowerPoint file. Text, tables, charts, code examples, an
 - interactions and nonlinear representations;
 - data-driven events versus target-driven events;
 - filter, wrapper, embedded, and stability-based feature selection;
-- distribution, relationship, and operational feature stability;
+- distribution, relationship, and operational feature stability, including three real UCI lookback plots across t−5 to t;
+- a worked PSI calculation with bin-level contributions and a clear distinction between variable PSI and delayed target PSI;
 - scorecard binning, decision-tree cut points, WOE, Information Value, and the distinct meanings of Gini;
 - worked cases using the real UCI credit-default data;
 - leakage-safe validation, selection, stability, and documentation;

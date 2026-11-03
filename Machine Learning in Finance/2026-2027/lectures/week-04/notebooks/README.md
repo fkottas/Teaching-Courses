@@ -4,3 +4,5 @@ Open [`lecture_04_feature_engineering_finance.ipynb`](lecture_04_feature_enginee
 
 The `.py` file contains the same executable logic for students who prefer to inspect or run a plain Python script.
 
+The notebook also plots the real six-step UCI lookback history and calculates variable PSI between the oldest encoded month and the reporting snapshot. It explicitly distinguishes this within-account history from production calendar-period drift.
+

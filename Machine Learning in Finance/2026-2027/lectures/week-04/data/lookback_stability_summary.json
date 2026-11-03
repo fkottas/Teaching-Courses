@@ -1,0 +1,58 @@
+{
+  "source": "UCI Default of Credit Card Clients (dataset 350)",
+  "source_url": "https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients",
+  "time_interpretation": "The source encodes six historical months in columns. t is the reporting snapshot; t\u22125 is the oldest encoded month. These are within-account lookback profiles, not production calendar-period drift.",
+  "periods": [
+    "t\u22125",
+    "t\u22124",
+    "t\u22123",
+    "t\u22122",
+    "t\u22121",
+    "t"
+  ],
+  "bill_amount_mean": [
+    38871.7604,
+    40311.401,
+    43262.949,
+    47013.1548,
+    49179.0752,
+    51223.3309
+  ],
+  "payment_amount_mean": [
+    5215.5026,
+    4799.3876,
+    4826.0769,
+    5225.6815,
+    5921.1635,
+    5663.5805
+  ],
+  "utilization_mean": [
+    0.318585,
+    0.333108,
+    0.359503,
+    0.392192,
+    0.411128,
+    0.423771
+  ],
+  "overdue_rate": [
+    0.102633,
+    0.098933,
+    0.117,
+    0.140433,
+    0.147933,
+    0.227267
+  ],
+  "n": [
+    30000,
+    30000,
+    30000,
+    30000,
+    30000,
+    30000
+  ],
+  "headline": {
+    "utilization_change_oldest_to_latest": 0.105186,
+    "overdue_rate_change_oldest_to_latest": 0.124634,
+    "bill_amount_change_oldest_to_latest": 12351.5705
+  }
+}

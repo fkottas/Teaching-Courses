@@ -59,3 +59,5 @@ The file `feature_correlation_matrix.json` contains the pairwise correlation mat
 
 Check column types, duplicate IDs, missing values, zero denominators, infinite ratios, negative or impossible amounts, status-code ranges, target balance, and the number of rows affected by every policy. A feature should not be considered complete until its data-quality policy is written down.
 
+The file lookback_stability_summary.json contains the six encoded lookback-period summaries used in the presentation: mean bill amount, mean payment amount, mean utilization, and the share of accounts with a positive repayment-status code for t−5 through t. It is calculated from the real UCI source. These are within-account lookback profiles, not calendar-period population drift, because the UCI file does not provide observation dates or later monitoring cohorts.
+
