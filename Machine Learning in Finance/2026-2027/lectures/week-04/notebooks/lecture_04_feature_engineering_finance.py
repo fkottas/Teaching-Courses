@@ -255,7 +255,126 @@ print(
 
 
 # %% [markdown]
-# # 7. Interaction: a combined financial state
+# # 7. Monthly monitoring: variable distributions and target default rates
+#
+# The UCI file has no calendar observation date, so it cannot support a genuine month-by-month drift study. For this monitoring example we use a second open LendingClub extract with issue_d, revol_util, grade, and loan_status.
+#
+# The construction is deliberately explicit:
+#
+# - For the input variable, compare the monthly distribution across fixed revolving-utilisation bins.
+# - For the categorical input, compare monthly grade shares.
+# - For the target, plot the eventual default rate by issue month. The denominator contains only resolved loans (Fully Paid or Charged Off), so unresolved Current loans are not silently treated as non-defaults.
+#
+# This is a monitoring mechanics example, not a one-month forward PD estimate.
+#
+#
+
+# %%
+LENDINGCLUB_URL = 'https://raw.githubusercontent.com/akshayr89/Lending-Club---Exploratory-Data-Analysis/master/loan.csv'
+LOCAL_LENDINGCLUB = '/workspace/scratch/ba5b2241db61/week4_build/data/lendingclub_accepted_2015.csv'
+
+if Path(LOCAL_LENDINGCLUB).exists():
+    loans = pd.read_csv(LOCAL_LENDINGCLUB, low_memory=False)
+else:
+    loans = pd.read_csv(LENDINGCLUB_URL, low_memory=False)
+
+resolved = loans[loans['loan_status'].isin(['Fully Paid', 'Charged Off'])].copy()
+resolved['issue_month'] = pd.to_datetime(resolved['issue_d'], format='%b-%y')
+resolved['default'] = (resolved['loan_status'] == 'Charged Off').astype(int)
+resolved['revol_util_pct'] = pd.to_numeric(
+    resolved['revol_util'].astype(str).str.rstrip('%'), errors='coerce'
+)
+resolved[['issue_month', 'grade', 'revol_util_pct', 'loan_status', 'default']].head()
+
+
+# %%
+monthly_target = resolved.groupby('issue_month').agg(
+    loans=('default', 'size'),
+    defaults=('default', 'sum'),
+    default_rate=('default', 'mean')
+)
+monthly_target.tail(12)
+
+
+# %%
+util_bins_lc = [-np.inf, 25, 50, 75, np.inf]
+util_labels_lc = ['0–25%', '25–50%', '50–75%', '≥75%']
+resolved['util_bin'] = pd.cut(
+    resolved['revol_util_pct'], bins=util_bins_lc,
+    labels=util_labels_lc, include_lowest=True
+)
+
+monthly_variable_share = pd.crosstab(
+    resolved['issue_month'], resolved['util_bin'], normalize='index'
+).reindex(columns=util_labels_lc, fill_value=0)
+monthly_variable_share.tail(12)
+
+
+# %%
+fig, axes = plt.subplots(1, 3, figsize=(18, 4.8))
+monthly_variable_share.tail(12).plot.bar(
+    stacked=True, ax=axes[0], colormap='viridis', width=.85
+)
+axes[0].set_title('Monthly variable distribution')
+axes[0].set_ylabel('Share of resolved loans')
+axes[0].set_xlabel('Issue month')
+axes[0].legend(title='revol_util_pct bin', fontsize=8)
+
+monthly_grade_share = pd.crosstab(
+    resolved['issue_month'], resolved['grade'], normalize='index'
+).reindex(columns=list('ABCDEFG'), fill_value=0)
+monthly_grade_share.tail(12).plot.bar(
+    stacked=True, ax=axes[1], colormap='tab10', width=.85
+)
+axes[1].set_title('Monthly categorical distribution')
+axes[1].set_ylabel('Share of resolved loans')
+axes[1].set_xlabel('Issue month')
+axes[1].legend(title='grade', fontsize=8, ncol=2)
+
+monthly_target.tail(12)['default_rate'].plot(
+    ax=axes[2], marker='o', linewidth=2.5, color='#D66F61'
+)
+axes[2].set_title('Monthly target default rate')
+axes[2].set_ylabel('Eventual resolved-loan default rate')
+axes[2].set_xlabel('Issue month')
+for axis in axes:
+    axis.tick_params(axis='x', rotation=45)
+    axis.grid(alpha=.25)
+plt.tight_layout()
+plt.show()
+
+
+# %% [markdown]
+# # 8. Monthly variable PSI and the target-rate distinction
+#
+# Variable PSI compares rows of fixed bin shares. A target rate is a mean of a binary label and should be plotted as a time series; it is not a distribution plot of 0 and 1. The labels must be mature before target monitoring is interpreted.
+#
+#
+
+# %%
+def psi_from_shares(reference, monitoring, epsilon=1e-6):
+    reference = np.asarray(reference, dtype=float)
+    monitoring = np.asarray(monitoring, dtype=float)
+    return np.sum(
+        (monitoring + epsilon - reference - epsilon)
+        * np.log((monitoring + epsilon) / (reference + epsilon))
+    )
+
+recent_monthly_variable_share = monthly_variable_share.tail(12)
+reference_share = recent_monthly_variable_share.iloc[0]
+monthly_variable_psi = recent_monthly_variable_share.apply(
+    lambda row: psi_from_shares(reference_share, row), axis=1
+)
+print('Monthly variable PSI vs first month:')
+print(monthly_variable_psi.tail(12).round(4))
+print('\nTarget default-rate series:')
+print(monthly_target.tail(12)[['loans', 'defaults', 'default_rate']].assign(
+    default_rate=lambda frame: frame['default_rate'].map(lambda value: f'{value:.2%}')
+))
+
+
+# %% [markdown]
+# # 9. Interaction: a combined financial state
 #
 # An interaction preserves a joint condition. Keep the component variables because the combined state should not hide whether the signal came from utilisation, recency, or both.
 #
@@ -270,7 +389,7 @@ interaction_result
 
 
 # %% [markdown]
-# # 8. Leakage demonstration
+# # 10. Leakage demonstration
 #
 # This toy example shows why a random full-sample quantile is not the correct threshold when the threshold is meant to be learned from training data. The safe threshold is estimated from training rows and then applied unchanged to held-out rows.
 #
@@ -288,7 +407,7 @@ print('The safe threshold is fitted on training rows only.')
 
 
 # %% [markdown]
-# # 9. Export a small derived teaching sample
+# # 11. Export a small derived teaching sample
 #
 # The repository sample is only for quick inspection. For analysis, use the complete canonical source downloaded above.
 #

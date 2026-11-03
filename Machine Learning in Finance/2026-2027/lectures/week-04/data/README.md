@@ -61,3 +61,26 @@ Check column types, duplicate IDs, missing values, zero denominators, infinite r
 
 The file lookback_stability_summary.json contains the six encoded lookback-period summaries used in the presentation: mean bill amount, mean payment amount, mean utilization, and the share of accounts with a positive repayment-status code for t−5 through t. It is calculated from the real UCI source. These are within-account lookback profiles, not calendar-period population drift, because the UCI file does not provide observation dates or later monitoring cohorts.
 
+## Monthly monitoring source
+
+The monthly monitoring plots use an open LendingClub loan extract mirrored in the public repository [akshayr89/Lending-Club---Exploratory-Data-Analysis](https://github.com/akshayr89/Lending-Club---Exploratory-Data-Analysis/blob/master/loan.csv). The notebook loads the raw CSV from the public [raw URL](https://raw.githubusercontent.com/akshayr89/Lending-Club---Exploratory-Data-Analysis/master/loan.csv) in Colab. The repository stores the exact monthly summary used by the deck in `monthly_monitoring_summary.json`; the raw fields used in the lecture are:
+
+| Field | Meaning | Use in the monitoring example |
+|---|---|---|
+| `issue_d` | Loan issue month, such as `Jan-11` | Monthly grouping key |
+| `revol_util` | Revolving-line utilisation stored as a percentage string, such as `83.70%` | Parsed into `revol_util_pct`, then grouped into fixed bins |
+| `grade` | LendingClub origination risk grade from A to G | Categorical composition monitoring |
+| `loan_status` | Loan outcome status | `Charged Off` is the default event; `Fully Paid` is the non-default resolved outcome |
+
+For this example, unresolved `Current` loans are excluded from the eventual default-rate denominator. This avoids silently treating immature outcomes as non-defaults. The target series is therefore:
+
+`default_rate_m = number of Charged Off loans in month m / number of Fully Paid or Charged Off loans in month m`.
+
+This is an eventual resolved-loan rate by issue month, not a one-month-forward Probability of Default. The file `monthly_monitoring_summary.json` records the fixed bins, category shares, monthly denominators, default counts, target rates, PSI values, source, and this caveat.
+
+## Monitoring interpretation
+
+- Numeric explanatory variable: plot the monthly share in each fixed bin and calculate variable PSI.
+- Categorical explanatory variable: plot monthly category shares and define the treatment of missing or unseen categories.
+- Binary target: plot the monthly default-rate time series with the eligible denominator and event count; do not present it as a variable-distribution chart.
+
