@@ -12,11 +12,18 @@
 import io
 import zipfile
 import urllib.request
+import importlib.util
+import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+# Colab may not include the legacy .xls reader in a fresh runtime.
+if importlib.util.find_spec('xlrd') is None:
+    subprocess.check_call([sys.executable, '-m', 'pip', '-q', 'install', 'xlrd'])
 
 pd.set_option('display.max_columns', 60)
 pd.set_option('display.float_format', lambda value: f'{value:,.4f}')
