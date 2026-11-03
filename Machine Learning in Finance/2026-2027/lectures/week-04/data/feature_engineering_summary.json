@@ -1,0 +1,281 @@
+{
+  "rows": 30000,
+  "cols": 25,
+  "default_rate": 0.2212,
+  "feature_means": {
+    "utilization": 0.4237714513249211,
+    "total_bill_6m": 269861.6712,
+    "total_paid_6m": 31651.392566666666,
+    "payment_to_bill_6m": 0.39231783394393493,
+    "overdue_count": 0.8342,
+    "max_delay": 0.4387333333333333,
+    "bill_change_1m": 2044.2557333333334,
+    "payment_change_1m": -257.583
+  },
+  "feature_quantiles": {
+    "utilization": [
+      -0.0004842255639097744,
+      0.31399385714285716,
+      1.2318826249999975
+    ],
+    "payment_to_bill_6m": [
+      0.0,
+      0.09213251330204067,
+      2.7941639682237724
+    ],
+    "bill_change_1m": [
+      -51708.14,
+      0.0,
+      78806.94999999969
+    ]
+  },
+  "util_rate": [
+    {
+      "band": "0\u201325%",
+      "n": 14037,
+      "rate": 0.18280259314668376
+    },
+    {
+      "band": "25\u201350%",
+      "n": 3589,
+      "rate": 0.21733073279465032
+    },
+    {
+      "band": "50\u201380%",
+      "n": 4394,
+      "rate": 0.26331360946745563
+    },
+    {
+      "band": "80\u2013100%",
+      "n": 5857,
+      "rate": 0.2552501280519037
+    },
+    {
+      "band": ">100%",
+      "n": 2123,
+      "rate": 0.3005181347150259
+    }
+  ],
+  "over_rate": [
+    {
+      "count": 0,
+      "n": 19931,
+      "rate": 0.11710400883046511
+    },
+    {
+      "count": 1,
+      "n": 4426,
+      "rate": 0.298237686398554
+    },
+    {
+      "count": 2,
+      "n": 1899,
+      "rate": 0.3875724065297525
+    },
+    {
+      "count": 3,
+      "n": 1154,
+      "rate": 0.5086655112651647
+    },
+    {
+      "count": 4,
+      "n": 951,
+      "rate": 0.573080967402734
+    },
+    {
+      "count": 5,
+      "n": 298,
+      "rate": 0.5738255033557047
+    },
+    {
+      "count": 6,
+      "n": 1341,
+      "rate": 0.703206562266965
+    }
+  ],
+  "recent_rate": [
+    {
+      "recent_overdue": 0,
+      "n": 23182,
+      "rate": 0.13834009145026313
+    },
+    {
+      "recent_overdue": 1,
+      "n": 6818,
+      "rate": 0.5029334115576415
+    }
+  ],
+  "correlations": {
+    "utilization": 0.08616810335391423,
+    "payment_to_bill_6m": -0.011390827358803304,
+    "overdue_count": 0.39839435992672134,
+    "max_delay": 0.33103649760064663,
+    "bill_change_1m": -0.019234498231380803,
+    "payment_change_1m": 0.005849499112862066
+  },
+  "sample_rows": [
+    {
+      "ID": 1,
+      "LIMIT_BAL": 20000,
+      "AGE": 24,
+      "PAY_0": 2,
+      "PAY_2": 2,
+      "PAY_3": -1,
+      "PAY_4": -1,
+      "PAY_5": -2,
+      "PAY_6": -2,
+      "BILL_AMT1": 3913,
+      "BILL_AMT2": 3102,
+      "PAY_AMT1": 0,
+      "PAY_AMT2": 689,
+      "default_next_month": 1,
+      "utilization": 0.19565,
+      "overdue_count": 2,
+      "payment_to_bill_6m": 0.08943406022845275,
+      "bill_change_1m": 811,
+      "payment_change_1m": -689
+    },
+    {
+      "ID": 2,
+      "LIMIT_BAL": 120000,
+      "AGE": 26,
+      "PAY_0": -1,
+      "PAY_2": 2,
+      "PAY_3": 0,
+      "PAY_4": 0,
+      "PAY_5": 0,
+      "PAY_6": 2,
+      "BILL_AMT1": 2682,
+      "BILL_AMT2": 1725,
+      "PAY_AMT1": 0,
+      "PAY_AMT2": 1000,
+      "default_next_month": 1,
+      "utilization": 0.02235,
+      "overdue_count": 2,
+      "payment_to_bill_6m": 0.29279147391227967,
+      "bill_change_1m": 957,
+      "payment_change_1m": -1000
+    },
+    {
+      "ID": 3,
+      "LIMIT_BAL": 90000,
+      "AGE": 34,
+      "PAY_0": 0,
+      "PAY_2": 0,
+      "PAY_3": 0,
+      "PAY_4": 0,
+      "PAY_5": 0,
+      "PAY_6": 0,
+      "BILL_AMT1": 29239,
+      "BILL_AMT2": 14027,
+      "PAY_AMT1": 1518,
+      "PAY_AMT2": 1500,
+      "default_next_month": 0,
+      "utilization": 0.32487777777777777,
+      "overdue_count": 0,
+      "payment_to_bill_6m": 0.10838834072776997,
+      "bill_change_1m": 15212,
+      "payment_change_1m": 18
+    },
+    {
+      "ID": 4,
+      "LIMIT_BAL": 50000,
+      "AGE": 37,
+      "PAY_0": 0,
+      "PAY_2": 0,
+      "PAY_3": 0,
+      "PAY_4": 0,
+      "PAY_5": 0,
+      "PAY_6": 0,
+      "BILL_AMT1": 46990,
+      "BILL_AMT2": 48233,
+      "PAY_AMT1": 2000,
+      "PAY_AMT2": 2019,
+      "default_next_month": 0,
+      "utilization": 0.9398,
+      "overdue_count": 0,
+      "payment_to_bill_6m": 0.03625926150068732,
+      "bill_change_1m": -1243,
+      "payment_change_1m": -19
+    },
+    {
+      "ID": 5,
+      "LIMIT_BAL": 50000,
+      "AGE": 57,
+      "PAY_0": -1,
+      "PAY_2": 0,
+      "PAY_3": -1,
+      "PAY_4": 0,
+      "PAY_5": 0,
+      "PAY_6": 0,
+      "BILL_AMT1": 8617,
+      "BILL_AMT2": 5670,
+      "PAY_AMT1": 2000,
+      "PAY_AMT2": 36681,
+      "default_next_month": 0,
+      "utilization": 0.17234,
+      "overdue_count": 0,
+      "payment_to_bill_6m": 0.5400543264525924,
+      "bill_change_1m": 2947,
+      "payment_change_1m": -34681
+    }
+  ],
+  "interaction_rate": [
+    {
+      "high_utilization": 0,
+      "recent_overdue": 0,
+      "n": 17343,
+      "rate": 0.13134982413653923
+    },
+    {
+      "high_utilization": 0,
+      "recent_overdue": 1,
+      "n": 4677,
+      "rate": 0.47573230703442376
+    },
+    {
+      "high_utilization": 1,
+      "recent_overdue": 0,
+      "n": 5839,
+      "rate": 0.15910258605925673
+    },
+    {
+      "high_utilization": 1,
+      "recent_overdue": 1,
+      "n": 2141,
+      "rate": 0.5623540401681457
+    }
+  ],
+  "payment_rate": [
+    {
+      "band": "0\u20135%",
+      "n": 9903,
+      "rate": 0.27143289912147833
+    },
+    {
+      "band": "5\u201310%",
+      "n": 5018,
+      "rate": 0.2658429653248306
+    },
+    {
+      "band": "10\u201325%",
+      "n": 3348,
+      "rate": 0.1977299880525687
+    },
+    {
+      "band": "25\u201350%",
+      "n": 2558,
+      "rate": 0.14425332290852227
+    },
+    {
+      "band": "50\u2013100%",
+      "n": 4770,
+      "rate": 0.14779874213836477
+    },
+    {
+      "band": ">100%",
+      "n": 3533,
+      "rate": 0.1587885649589584
+    }
+  ]
+}

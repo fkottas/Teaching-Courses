@@ -1,16 +1,45 @@
-# Week 4 — Feature engineering for financial data
+# Machine Learning in Finance — Week 4
 
-**Status:** Planned · **Teaching date:** TBA by the official programme timetable
+## Feature Engineering for Financial Data
 
-This is the stable student navigation page for Week 4. The page will be completed with the lecture presentation, executed Google Colab, data documentation, and weekly assignment before the week is released.
+**Academic year:** 2026–2027  
+**Programme:** MPhil in Economics, National and Kapodistrian University of Athens  
+**Course mode:** English; supervised learning throughout  
+**Week focus:** Turn raw financial fields into interpretable, leakage-safe predictors.
 
-## Student route
+## Start here
 
-1. Read the theory in the presentation.
-2. Open the executed Colab and run it from top to bottom.
-3. Read the data dictionary before interpreting results.
-4. Complete the weekly assignment and submit it by the deadline stated in the assignment page.
+| Resource | Purpose | Link |
+|---|---|---|
+| Lecture presentation | 109-slide editable lecture deck with theory, worked cases, plots, code, and analytical speaker notes | [Open the PPTX](slides/Lecture_04_Feature_Engineering_for_Financial_Data_2026-2027.pptx) |
+| Colab notebook | Reproducible feature-engineering lab using the real UCI credit-default data | [Open the notebook](notebooks/lecture_04_feature_engineering_finance.ipynb) |
+| Python script | Same lab as a plain `.py` file for inspection or local execution | [Open the script](notebooks/lecture_04_feature_engineering_finance.py) |
+| Dataset guide | Source, observation unit, target, raw fields, derived fields, and limitations | [Read the data guide](data/README.md) |
+| Derived teaching sample | 1,000 rows derived from the complete UCI data; useful for quick inspection | [Download CSV](data/credit_feature_engineering_sample.csv) |
+| Feature dictionary | Compact field-by-field definition for the derived sample | [Read the dictionary](reference/feature_dictionary.md) |
+| Mathematics reference | Editable, plain-text formulas and the slide locations where they belong | [Read the mathematics reference](reference/mathematics_to_insert.md) |
+| Weekly assignment | Submission requirements and analytical questions | [Read the assignment](assignment/README.md) |
 
-## Current release state
+## Learning route
 
-The material for this week is not yet published. No link on this page is intended to suggest that an unreleased file already exists.
+1. Define the observation unit, target, prediction horizon, and information cutoff.
+2. Translate a financial mechanism into a feature definition.
+3. Construct ratios, counts, indicators, transformations, changes, rolling summaries, and interactions.
+4. Check zero denominators, missing values, tails, and temporal ordering.
+5. Separate descriptive association from causal interpretation.
+6. Document every feature so that another analyst can reproduce it.
+
+## Dataset and reproducibility
+
+The notebook uses the **Default of Credit Card Clients** dataset from the UCI Machine Learning Repository. The target is whether the client defaulted on payment in the following month. The complete source file is downloaded by the notebook from the canonical UCI archive; the small CSV in this folder is a derived teaching sample and is not a replacement for the source data.
+
+The sample contains the raw identifying, demographic, credit-limit, bill, payment, repayment-status, and target fields needed for the examples, plus the engineered features developed in the lecture. The data guide records the source, licence, target timing, and limitations.
+
+## What to submit
+
+Submit one executed Colab notebook one day before the next course meeting. It must include the code, outputs, plots, feature dictionary, and a short interpretation for each selected feature. Do not claim that a descriptive relationship is causal.
+
+## Important boundary
+
+This week is about representation, not model competition. Do not select features using the full target-labelled dataset before a later validation step. Features that depend on training percentiles, scaling parameters, imputation values, or target information must be fitted inside the training route.
+
