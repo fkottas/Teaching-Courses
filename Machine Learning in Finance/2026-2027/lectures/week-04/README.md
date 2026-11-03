@@ -17,7 +17,7 @@
 | Dataset guide | Source, observation unit, target, raw fields, derived fields, and limitations | [Read the data guide](data/README.md) |
 | Lookback stability summary | Real UCI six-step input-history summaries used for the time-series plots | [Open JSON](data/lookback_stability_summary.json) |
 | Monthly monitoring summary | Monthly fixed-bin distributions, category shares, default-rate series, and variable PSI from the resolved LendingClub extract | [Open JSON](data/monthly_monitoring_summary.json) |
-| External figures | Editable deck figures for tree anatomy and scorecard binning, with source links | [Open figure credits](slides/README.md) |
+| External figures | Sourced visuals for filter statistics, RFE, correlated-feature importance, Lasso, tree anatomy, and scorecard binning | [Open figure credits](slides/README.md) |
 | Derived teaching sample | 1,000 rows derived from the complete UCI data; useful for quick inspection | [Download CSV](data/credit_feature_engineering_sample.csv) |
 | Feature dictionary | Compact field-by-field definition for the derived sample | [Read the dictionary](reference/feature_dictionary.md) |
 | Mathematics reference | Editable, plain-text formulas and the slide locations where they belong | [Read the mathematics reference](reference/mathematics_to_insert.md) |
@@ -30,8 +30,9 @@
 3. Construct ratios, counts, indicators, transformations, changes, rolling summaries, and interactions.
 4. Check zero denominators, missing values, tails, and temporal ordering.
 5. Separate descriptive association from causal interpretation.
-6. Monitor numeric-bin distributions, categorical shares, and target default-rate time series as different objects.
-7. Document every feature so that another analyst can reproduce it.
+6. Select variables with filter, wrapper, embedded, and stability-based methods inside the validation route.
+7. Monitor numeric-bin distributions, categorical shares, and target default-rate time series as different objects.
+8. Document every feature so that another analyst can reproduce it.
 
 ## Dataset and reproducibility
 

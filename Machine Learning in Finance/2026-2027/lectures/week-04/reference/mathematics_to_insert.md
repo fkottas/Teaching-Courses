@@ -20,7 +20,19 @@ The presentation uses editable native text for these equations. This reference u
 | 44 | Quadratic term | x² = x × x |
 | 45 | Binning | bin(x) = j when bⱼ ≤ x < bⱼ₊₁ |
 | 47 | Conceptual WOE | WOEⱼ = ln(good share in bin j / bad share in bin j) |
+| 50 | Selection objective | S* = argmax over S ⊆ {1, …, p} of E_CV[Score(model(X_S), y)] |
+| 51 | Selection families | Filter: scoreⱼ = T(Xⱼ, y); wrapper: S* = argmaxₛ CVScore(S); embedded: minβ L(β) + λP(β); stability: πⱼ = (1/B)Σᵦ 𝟙(j ∈ Sᵦ) |
+| 52 | Filter statistics | Fⱼ = MS_between,ⱼ / MS_within,ⱼ; MI(Xⱼ;Y) = Σₓ,ᵧ p(x,y) ln[p(x,y) / (p(x)p(y))] |
+| 53 | Pearson association | rⱼ = cov(Xⱼ, Y) / (σXⱼ σY) |
+| 54 | Correlation matrix | rₐᵦ = Σᵢ(aᵢ − ā)(bᵢ − b̄) / √[Σᵢ(aᵢ − ā)² Σᵢ(bᵢ − b̄)²] |
+| 55 | Permutation importance | PIⱼ = M_base − M_perm(j) |
+| 56 | Mutual information worked example | MI(X;Y) = Σₓ,ᵧ p(x,y) ln[p(x,y) / (p(x)p(y))] = 0.193 nats for the displayed table |
+| 57 | Recursive feature elimination | S* = argmaxₖ CVScore(RFEₖ(X), y) |
+| 58 | Lasso selection | β̂(λ) = argminβ { −ℓ(β) + λΣⱼ|βⱼ| } |
 | 59 | Elastic Net | minimize −ℓ(β₀, β) + λ[α‖β‖₁ + (1−α)(1/2)‖β‖₂²] |
+| 60 | Regularisation strength in scikit-learn | C = 1 / λ |
+| 61 | Leakage-safe selection pipeline | Fit preprocessing, selected columns, and model on the training fold; apply the frozen route to validation data |
+| 62 | Stability selection | πⱼ = (1 / B) Σᵦ₌₁ᴮ 𝟙(j ∈ Sᵦ); for [1,1,1,1,0], πⱼ = 4/5 = 0.80 |
 | 64 | Monthly variable distribution | pⱼ,ₘ = count(bin j in month m) / count(non-missing variable in month m) |
 | 65 | Monthly categorical distribution | pₖ,ₘ = count(category k in month m) / count(non-missing category in month m) |
 | 66 | Monthly target rate | DRₘ = Dₘ / Nₘ, where Dₘ is the number of defaults and Nₘ is the eligible resolved-loan denominator |
@@ -33,6 +45,70 @@ The presentation uses editable native text for these equations. This reference u
 | 87 | Information Coefficient and model Gini | ICₜ = ρₛ(ŝᵢ,ₜ, rᵢ,ₜ₊₁) = corr(rank(ŝᵢ,ₜ), rank(rᵢ,ₜ₊₁)); Gini_model = 2 × AUC − 1 |
 
 ## Worked calculations
+
+### Feature selection objective
+
+Let S be a candidate subset of the p available predictors. A useful teaching formulation is:
+
+S* = argmax over S ⊆ {1, …, p} of E_CV[Score(model(X_S), y)]
+
+The expectation is approximated by the average score across validation folds. The constraints still matter: the variables must be available at the prediction point, reproducible, interpretable, and stable enough for the intended use.
+
+### Filter statistics
+
+For an F-test screen, the statistic compares variation between target groups with variation within target groups:
+
+Fⱼ = MS_between,ⱼ / MS_within,ⱼ
+
+Mutual information compares the joint distribution with the product of its marginals:
+
+MI(Xⱼ;Y) = Σₓ,ᵧ p(x,y) ln[p(x,y) / (p(x)p(y))]
+
+For the binary table used on Slide 56, the joint probabilities are 0.40, 0.10, 0.10, and 0.40, while p(X = low) = p(X = high) = p(Y = 0) = p(Y = 1) = 0.50. Therefore:
+
+MI = 2 × 0.40 × ln(0.40 / 0.25) + 2 × 0.10 × ln(0.10 / 0.25) = 0.193 nats
+
+The value is zero when every joint probability equals p(x)p(y). Mutual information detects dependence, not causality.
+
+### Correlation and permutation importance
+
+Pearson correlation is:
+
+rₐᵦ = Σᵢ(aᵢ − ā)(bᵢ − b̄) / √[Σᵢ(aᵢ − ā)² Σᵢ(bᵢ − b̄)²]
+
+For a model-based permutation score, define:
+
+PIⱼ = M_base − M_perm(j)
+
+If the baseline AUC is 0.74 and the AUC after shuffling feature j is 0.70, then PIⱼ = 0.04. With correlated predictors, another feature can preserve the signal after the shuffle, so a small individual PIⱼ does not prove that the feature family is unimportant.
+
+### Wrapper and embedded selection
+
+Recursive feature elimination can be written as:
+
+S* = argmaxₖ CVScore(RFEₖ(X), y)
+
+The estimator is fitted repeatedly, the least important variables are removed, and the subset size is chosen by cross-validation. Lasso uses:
+
+β̂(λ) = argminβ { −ℓ(β) + λΣⱼ|βⱼ| }
+
+The L1 penalty can make some coefficients exactly zero. Elastic Net adds an L2 term:
+
+minimize −ℓ(β₀, β) + λ[α‖β‖₁ + (1−α)(1/2)‖β‖₂²]
+
+For β = (0.8, 0.7), λ = 0.1, and α = 0.5, ‖β‖₁ = 1.5 and ‖β‖₂² = 1.13. The penalty contribution is:
+
+0.1[0.5(1.5) + 0.5(0.5)(1.13)] = 0.10325
+
+In scikit-learn logistic regression, C = 1 / λ. Therefore a smaller C means stronger regularisation.
+
+### Stability selection
+
+If Sᵦ is the selected set in resample b, the empirical selection frequency is:
+
+πⱼ = (1 / B) Σᵦ₌₁ᴮ 𝟙(j ∈ Sᵦ)
+
+For B = 5 and selection indicators [1, 1, 1, 1, 0], πⱼ = 4/5 = 0.80. This is persistence under the stated resampling design. Correlated variables can exchange places, so group-level stability should also be reported.
 
 ### Gini impurity
 

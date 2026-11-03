@@ -25,6 +25,10 @@ The deck is an editable PowerPoint file. Text, tables, charts, code examples, an
 
 - Decision-tree anatomy: scikit-learn documentation, [Understanding the decision tree structure](https://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure).
 - Binning, WOE, and IV illustration: MathWorks, [Binning Explorer case study](https://www.mathworks.com/help/risk/binning-explorer-case-study.html).
+- Filter statistics: scikit-learn, [F-test versus mutual information](https://scikit-learn.org/stable/auto_examples/feature_selection/plot_f_test_vs_mi.html).
+- Wrapper selection: scikit-learn, [Recursive feature elimination with cross-validation](https://scikit-learn.org/stable/auto_examples/feature_selection/plot_rfe_with_cross_validation.html).
+- Correlated-feature importance: scikit-learn, [Permutation importance with multicollinear features](https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html).
+- Lasso model selection: scikit-learn, [Lasso model selection](https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html).
 
-The figures are embedded as image assets in the deck for visual explanation. The surrounding mathematics, tables, plots, and code remain editable native PowerPoint content.
+The figures are embedded as image assets in the deck for visual explanation. The surrounding mathematics, tables, plots, and code remain editable native PowerPoint content. The external figures are used only where they clarify an algorithmic or mathematical idea; the course’s financial plots remain native charts from the documented teaching data.
 
