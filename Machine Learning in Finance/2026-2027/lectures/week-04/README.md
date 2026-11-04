@@ -55,5 +55,5 @@ This week is about representation, not model competition. Do not select features
 
 ## Presentation quality and editability
 
-The current deck is the single canonical presentation for Week 4. It contains 90 slides, editable native text/formulas/tables/charts/code, credited internet figures, and speaker notes with analytical explanations. The visual redesign was quality-checked after rendering; the assessment records the checks and the known data limitations.
+The current deck is the single canonical presentation for Week 4. It contains 90 slides, editable native text/tables/charts/code, high-resolution typeset equation visuals, credited internet figures, and speaker notes with analytical explanations. Copyable Unicode equations and the complete symbol glossary are in the mathematics reference. The visual redesign was quality-checked after rendering; the assessment records the checks and the known data limitations.
 

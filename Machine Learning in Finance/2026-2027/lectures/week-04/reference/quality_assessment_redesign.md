@@ -19,7 +19,7 @@ This assessment covers the complete 90-slide Week 4 deck after a rendered-slide 
 
 - The title slide is unchanged.
 - The body deck now uses square editorial panels, a restrained navy/teal/gold/coral palette, stronger whitespace, and a consistent left-hand section marker.
-- Native PowerPoint text, tables, charts, and formulas are used for the course’s own material. Students can edit the deck rather than receiving slide-sized screenshots.
+- Native PowerPoint text, tables, charts, and code are used for the course’s own material. Difficult equations are high-resolution typeset visuals so that symbols render consistently; the same equations remain available as copyable Unicode notation in the mathematics reference.
 - Official or primary-source figures are embedded only where they clarify an algorithm or mathematical idea: scikit-learn for feature-selection, permutation-importance, tree, Lasso, and Elastic Net coefficient-path examples; MathWorks for the WOE/IV illustration; FRED for credit-delinquency context.
 - The financial charts generated for the course remain native charts. Source, denominator, and teaching limitation are recorded in the slide notes and the package README.
 
@@ -79,7 +79,7 @@ The final generated deck was checked as follows:
 - Native tables: 39 tables present; arithmetic check passed for the worked IV table.
 - First-party artifact-tool import: passed, 90 slides.
 - Approved fonts: Arial and Courier New only.
-- Mathematics-reference scan: clean; the GitHub reference uses readable Unicode/plain text and does not require unsupported LaTeX control sequences or environments.
+- Mathematics-reference scan: clean; the GitHub reference uses readable Unicode/plain text and does not require unsupported LaTeX control sequences or environments. The deck’s equation images were rendered separately and visually inspected on the feature-selection, regularisation, PSI, Gini, WOE, and IV slides.
 
 ## Evidence and limitations
 

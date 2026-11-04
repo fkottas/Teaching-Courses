@@ -4,7 +4,7 @@ Download the single current deck:
 
 [Lecture 04 — Feature Engineering for Financial Data](Lecture_04_Feature_Engineering_for_Financial_Data_2026-2027.pptx)
 
-The deck is an editable PowerPoint file. Text, tables, charts, code examples, and speaker notes are native PowerPoint content rather than slide screenshots. The presentation contains 90 slides and is organised as:
+The deck is a 90-slide PowerPoint file. Explanatory text, tables, charts, code examples, and speaker notes remain native PowerPoint content. The difficult equations are embedded as high-resolution typeset visuals for reliable rendering, while the copyable Unicode notation and complete symbol glossary are provided in the mathematics reference.
 
 - why feature engineering is a financial-information problem;
 - observation units, targets, cutoffs, and feature contracts;
@@ -32,13 +32,13 @@ The deck is an editable PowerPoint file. Text, tables, charts, code examples, an
 - Elastic Net coefficient paths: scikit-learn, [Lasso, Lasso-LARS, and Elastic Net paths](https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_lasso_lars_elasticnet_path.html).
 - Target-driven event context: Board of Governors of the Federal Reserve System, [Delinquency Rate on Credit Card Loans, All Commercial Banks](https://fred.stlouisfed.org/series/DRCCLACBS), retrieved through FRED.
 
-The figures are embedded as image assets in the deck for visual explanation. The surrounding mathematics, tables, plots, and code remain editable native PowerPoint content. The external figures are used only where they clarify an algorithmic or mathematical idea; the course’s financial plots remain native charts from the documented teaching data.
+The figures are embedded as image assets in the deck for visual explanation. The surrounding explanations, tables, plots, and code remain editable native PowerPoint content. The equation visuals are high-resolution typeset objects, and the complete copyable notation is kept in the mathematics reference. The external figures are used only where they clarify an algorithmic or mathematical idea; the course’s financial plots remain native charts from the documented teaching data.
 
 ## Quality and editability note
 
 The deck was rebuilt after a full rendered-slide assessment. The selection sequence is now a decision route rather than a list: admissible candidates, filters, redundancy, wrappers, embedded regularisation, and stability. The event section separates `Xₜ` information available at the prediction point from `Yₜ₊₁` labels and later target monitoring. The PSI example exposes every intermediate term and uses separate treatments for explanatory-variable distributions and delayed binary-target monitoring. The tree section includes a numerical split comparison, a native Gini curve, per-bin WOE direction, and per-bin IV contributions.
 
-The presentation uses the unambiguous identity `log1p(xᵢ) = ln(1 + xᵢ)` and explicitly rejects the incorrect expression `log(xᵢ) = xᵢ + 1`. The regularisation slides pair readable native Unicode equations with official scikit-learn coefficient-path visuals, symbol definitions, and numerical substitutions. Text, formulas, tables, code, and course-generated charts are native PowerPoint content; external figures are embedded only as credited explanatory visuals.
+The presentation uses the unambiguous identity `log1p(xᵢ) = ln(1 + xᵢ)` and explicitly rejects the incorrect expression `log(xᵢ) = xᵢ + 1`. The regularisation slides pair high-resolution typeset equations with official scikit-learn coefficient-path visuals, symbol definitions, and numerical substitutions. Text, tables, code, and course-generated charts are native PowerPoint content; external figures and equation visuals are embedded only where they improve mathematical readability.
 
 See the [full visual and teaching redesign assessment](../reference/quality_assessment_redesign.md) and the [editable mathematics reference](../reference/mathematics_to_insert.md).
 
