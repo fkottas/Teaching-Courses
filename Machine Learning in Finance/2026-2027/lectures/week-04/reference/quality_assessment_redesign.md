@@ -20,7 +20,7 @@ This assessment covers the complete 90-slide Week 4 deck after a rendered-slide 
 - The title slide is unchanged.
 - The body deck now uses square editorial panels, a restrained navy/teal/gold/coral palette, stronger whitespace, and a consistent left-hand section marker.
 - Native PowerPoint text, tables, charts, and formulas are used for the course’s own material. Students can edit the deck rather than receiving slide-sized screenshots.
-- Official or primary-source figures are embedded only where they clarify an algorithm or mathematical idea: scikit-learn for feature-selection, permutation-importance, tree, and Lasso examples; MathWorks for the WOE/IV illustration; FRED for credit-delinquency context.
+- Official or primary-source figures are embedded only where they clarify an algorithm or mathematical idea: scikit-learn for feature-selection, permutation-importance, tree, Lasso, and Elastic Net coefficient-path examples; MathWorks for the WOE/IV illustration; FRED for credit-delinquency context.
 - The financial charts generated for the course remain native charts. Source, denominator, and teaching limitation are recorded in the slide notes and the package README.
 
 ## Teaching sequences rebuilt
@@ -76,7 +76,7 @@ The final generated deck was checked as follows:
 - PowerPoint package integrity: passed, 0 findings.
 - Layout and heading/bullet geometry: passed, 0 findings and 0 warnings.
 - Native charts: 13 charts validated; native quantitative-chart gate passed.
-- Native tables: 40 tables present; arithmetic check passed for the worked IV table.
+- Native tables: 39 tables present; arithmetic check passed for the worked IV table.
 - First-party artifact-tool import: passed, 90 slides.
 - Approved fonts: Arial and Courier New only.
 - Mathematics-reference scan: clean; the GitHub reference uses readable Unicode/plain text and does not require unsupported LaTeX control sequences or environments.
@@ -93,6 +93,7 @@ The UCI Default of Credit Card Clients file is used for feature-construction exa
 - [scikit-learn decision-tree structure](https://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure)
 - [scikit-learn correlated-feature permutation importance](https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html)
 - [scikit-learn Lasso model selection](https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html)
+- [scikit-learn Lasso, Lasso-LARS, and Elastic Net paths](https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_lasso_lars_elasticnet_path.html)
 - [MathWorks Binning Explorer case study](https://www.mathworks.com/help/risk/binning-explorer-case-study.html)
 - [FRED credit-card delinquency series](https://fred.stlouisfed.org/series/DRCCLACBS)
 - [ECB PSI guidance](https://www.bankingsupervision.europa.eu/ecb/pub/pdf/ssm.supervisory_guidance_on_the_validation_of_aml_and_cft_risk_assessment_models.en.pdf)

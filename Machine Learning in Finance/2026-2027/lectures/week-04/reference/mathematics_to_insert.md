@@ -31,13 +31,13 @@ This is the mathematics reference for the single canonical 90-slide deck. The eq
 | 48 | Permutation importance | PIⱼ = M_base − M_perm(j). |
 | 49 | RFE search | S⋆ = arg maxₖ CVScore(Sₖ), where Sₖ is the retained subset at step k. |
 | 50 | RFECV decision | k⋆ = arg maxₖ average_fold_score(k). |
-| 51 | Lasso | β̂(λ) = arg minβ { −ℓ(β) + λΣⱼ|βⱼ| }. |
-| 52 | Elastic Net | β̂(λ, α) = arg min_{β₀,β} { −ℓ(β₀,β) + λ[α‖β‖₁ + (1−α)(1/2)‖β‖₂²] }. |
+| 51 | Lasso | β̂ = arg min over β { −ℓ(β₀, β) + λΣⱼ|βⱼ| }. |
+| 52 | Elastic Net | (β̂₀, β̂) = arg min over (β₀, β) { −ℓ(β₀, β) + λ[α‖β‖₁ + (1−α)(1/2)‖β‖₂²] }. |
 | 53 | Elastic Net penalty | P(β) = λ[α‖β‖₁ + (1−α)(1/2)‖β‖₂²]. |
 | 54 | Tree-based selection | Choose feature-threshold pair θ that minimises weighted child impurity. |
 | 55 | Stability selection | πⱼ = (1/B)Σᵦ₌₁ᴮ 𝟙(j ∈ Sᵦ). |
 | 56 | Leakage-safe route | Fit preprocessing, selection, and model on the training fold; apply the frozen route to validation data. |
-| 57 | Cross-validation score | CVScore = (1/K)Σₖ Score(model trained on fold k, evaluated on fold k). |
+| 57 | Cross-validation score | CVScore = (1/Kf)Σᵣ₌₁ᴷᶠ Scoreᵣ. |
 | 63 | Numeric distribution | pⱼ,ₘ = count(bin j in month m) / count(non-missing X in month m). |
 | 64 | Categorical distribution | pₖ,ₘ = count(category k in month m) / count(non-missing category in month m). |
 | 65 | Target rate | BRₘ = Bₘ / Nₘ; SE(BRₘ) ≈ √[BRₘ(1−BRₘ) / Nₘ]. |
@@ -50,6 +50,61 @@ This is the mathematics reference for the single canonical 90-slide deck. The eq
 | 79 | WOE | GoodShareⱼ = Goodⱼ / Good_total; BadShareⱼ = Badⱼ / Bad_total; WOEⱼ = ln(GoodShareⱼ / BadShareⱼ). |
 | 81 | Information Value | IV = Σⱼ (GoodShareⱼ − BadShareⱼ) × WOEⱼ. |
 | 82 | Model Gini and IC | Gini_model = 2 × AUC − 1; ICₜ = corr(rank(signalₜ), rank(returnₜ₊₁)). |
+
+## Feature-selection symbol glossary
+
+The feature-selection slides use the same symbols repeatedly. Read this table before reading the equations; no symbol is intended to be a placeholder without a definition.
+
+| Symbol | Meaning | Concrete reading in the credit example |
+|---|---|---|
+| `j` | Feature index | `j = 3` means the third candidate column. |
+| `p` | Number of candidate features | If the table has 20 admissible columns, `p = 20`. |
+| `Xⱼ` | Column j of the design matrix | The utilisation column can be one `Xⱼ`. |
+| `X_S` | Design matrix restricted to subset S | If `S = {utilisation, overdue_count}`, `X_S` has those two columns. |
+| `y` | Observed target label | `y = 1` for the defined default event and `y = 0` otherwise. |
+| `S` | Candidate set of retained columns | A possible model input list, not the final answer. |
+| `S⋆` | Selected subset after the stated rule | The subset chosen by validated performance plus governance constraints. |
+| `CVScore` | Cross-validated score for a candidate subset | Mean ROC-AUC across the stated folds. |
+| `Fⱼ` | Univariate F-test score for feature j | Between-group variation divided by within-group variation. |
+| `MS_between,j` | Between-target-group mean square for feature j | How far the good and bad group means are separated. |
+| `MS_within,j` | Within-group mean square for feature j | Residual variation inside the good and bad groups. |
+| `p(x,y)` | Joint probability in mutual information | Share of rows in one X category and one Y category. |
+| `p(x)`, `p(y)` | Marginal probabilities | Row and column shares obtained from the joint table. |
+| `ln` | Natural logarithm | `ln(0.40 / 0.25)` is the log contribution in the worked cell. |
+| `r(X,Y)` | Pearson correlation | Linear association between one feature and the target. |
+| `cov(X,Y)` | Covariance | Average product of deviations from the two means. |
+| `σX`, `σY` | Standard deviations | The scale terms that standardise covariance in `r`. |
+| `M_base` | Validation metric before shuffling | Example: AUC = 0.74 with all columns unchanged. |
+| `M_perm,j` | Same metric after shuffling column j | Example: AUC = 0.70 after shuffling utilisation. |
+| `PIⱼ` | Permutation importance for feature j | `0.74 − 0.70 = 0.04` in that worked example. |
+| `k` | Number of retained features | `k = 8` means the candidate subset contains eight columns. |
+| `Sₖ` | Subset containing k retained features | The subset evaluated at a particular RFE step. |
+| `Kf` | Number of cross-validation folds | `Kf = 5` for five stratified folds. |
+| `r` | Fold index | `r = 1, …, Kf`; it is not Pearson correlation here. |
+| `Scoreᵣ,ₖ` | Score on fold r with k retained features | ROC-AUC for that fold and subset size. |
+| `β₀` | Model intercept | Baseline log-odds before adding feature contributions. |
+| `βⱼ` | Coefficient for feature j | The fitted contribution of column j on the model scale. |
+| `β` | Vector of all feature coefficients | `β = (β₁, …, βₚ)`. |
+| `ℓ(β₀,β)` | Log-likelihood | Fit term for the observed labels; larger is better before penalisation. |
+| `λ` | Total regularisation strength | Larger λ puts more weight on the penalty. |
+| `α` | L1 share in Elastic Net | `α = 1` is Lasso; `α = 0` is Ridge. |
+| `‖β‖₁` | L1 norm, `Σⱼ|βⱼ|` | Sum of coefficient magnitudes; it can produce exact zeros. |
+| `‖β‖₂²` | Squared L2 norm, `Σⱼβⱼ²` | Sum of squared coefficients; it shrinks large values smoothly. |
+| `θ = (j,t)` | Candidate tree split | Feature j and threshold t, such as `utilisation ≤ 0.80`. |
+| `G_split(θ)` | Weighted child impurity for split θ | The class mixing after the candidate split. |
+| `πⱼ` | Selection frequency for feature j | Selected in 42 of 50 resamples gives `πⱼ = 0.84`. |
+| `B` | Number of resamples | `B = 50` in the illustrative stability plot. |
+| `b` | Resample index | `b = 1, …, B`. |
+| `S_b` | Selected subset in resample b | The feature list chosen from one bootstrap or subsample. |
+| `𝟙(·)` | Indicator function | Equals 1 when the condition is true and 0 otherwise. |
+
+### Three equations read from left to right
+
+1. **Wrapper search:** `S⋆ = arg max over S CVScore(model(X_S), y)` means “try an admissible subset S, validate the resulting model, and keep the subset with the largest valid score.”
+2. **Permutation importance:** `PIⱼ = M_base − M_perm,j` means “measure how much the validation metric falls when only feature j is made uninformative by shuffling.”
+3. **Stability frequency:** `πⱼ = (1/B)Σᵦ 𝟙(j ∈ S_b)` means “count how often feature j is selected and divide by the number of resamples.”
+
+The equations are written as plain Unicode text rather than fragile LaTeX commands. The reference avoids unsupported delimiter commands, custom macros, and unclosed formula pairs.
 
 ## Interpretation rules
 
