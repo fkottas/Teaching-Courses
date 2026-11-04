@@ -1,4 +1,4 @@
-# Week 4 presentation — full visual and teaching redesign assessment
+# Week 4 presentation — high-quality rebuild assessment
 
 ## Scope
 
@@ -25,11 +25,11 @@ This assessment covers the complete 90-slide Week 4 deck after a rendered-slide 
 
 ## Teaching sequences rebuilt
 
-### Events and timing — Slides 10–12
+### Events and timing — Slides 11–15
 
 The sequence now starts with two parallel clocks. `Xₜ` is available at the prediction point; `Yₜ₊₁` is observed only after the outcome window. A data-driven event is demonstrated as a current utilization threshold crossing. A target-driven event is demonstrated as a later bad-rate movement, with the denominator and event-window caveat shown next to the FRED figure.
 
-### Feature selection — Slides 50–62
+### Feature selection — Slides 41–58
 
 The sequence now follows a decision route:
 
@@ -42,11 +42,11 @@ The sequence now follows a decision route:
 
 Each family has its own question, output, parameter choices, and limitation. Selection is explicitly kept inside the validation pipeline.
 
-### Stability and PSI — Slides 64–70
+### Stability and PSI — Slides 59–72
 
 The deck separates numeric-bin distributions, categorical shares, target-rate time series, relationship stability, and operational stability. The target slide uses a connected line with a labelled point for every month and keeps the denominator beside the jump. The PSI code shows both fixed-bin variable monitoring and delayed two-category target monitoring.
 
-### Binning, Gini, WOE, and IV — Slides 83–87
+### Binning, Gini, WOE, and IV — Slides 73–83
 
 The decision-tree section now includes:
 
@@ -75,8 +75,8 @@ The final generated deck was checked as follows:
 - `node --check` passed for the build source.
 - PowerPoint package integrity: passed, 0 findings.
 - Layout and heading/bullet geometry: passed, 0 findings and 0 warnings.
-- Native charts: 15 charts validated; native quantitative-chart gate passed.
-- Native tables: 33 tables present; arithmetic check passed for the worked IV table.
+- Native charts: 13 charts validated; native quantitative-chart gate passed.
+- Native tables: 40 tables present; arithmetic check passed for the worked IV table.
 - First-party artifact-tool import: passed, 90 slides.
 - Approved fonts: Arial and Courier New only.
 - Mathematics-reference scan: clean; the GitHub reference uses readable Unicode/plain text and does not require unsupported LaTeX control sequences or environments.

@@ -19,7 +19,7 @@ The deck is an editable PowerPoint file. Text, tables, charts, code examples, an
 - scorecard binning, decision-tree cut points, an official scikit-learn tree-structure figure, WOE, Information Value, Information Coefficient, and the distinct meanings of Gini;
 - worked cases using the real UCI credit-default data;
 - leakage-safe validation, selection, stability, and documentation;
-- the Week 4 assignment and the bridge to logistic regression in Week 5.
+- the Week 4 assignment and the final model-readiness gate.
 
 ## External figure credits
 
