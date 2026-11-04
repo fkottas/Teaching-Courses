@@ -20,22 +20,23 @@ The presentation uses editable native text for these equations. This reference u
 | 44 | Quadratic term | x² = x × x |
 | 45 | Binning | bin(x) = j when bⱼ ≤ x < bⱼ₊₁ |
 | 47 | Conceptual WOE | WOEⱼ = ln(good share in bin j / bad share in bin j) |
+| 12 | Target-driven event | BRₜ = Bₜ / Nₜ; ΔBRₜ = BRₜ − BRₜ₋₁ |
 | 50 | Selection objective | S* = argmax over S ⊆ {1, …, p} of E_CV[Score(model(X_S), y)] |
-| 51 | Selection families | Filter: scoreⱼ = T(Xⱼ, y); wrapper: S* = argmaxₛ CVScore(S); embedded: minβ L(β) + λP(β); stability: πⱼ = (1/B)Σᵦ 𝟙(j ∈ Sᵦ) |
+| 51 | Selection families and parameters | Filter: scoreⱼ = T(Xⱼ, y); wrapper: S* = argmaxₛ CVScore(S); embedded: minβ L(β) + λP(β); stability: πⱼ = (1/B)Σᵦ 𝟙(j ∈ Sᵦ). Parameters include k, cv, scoring, step, C = 1/λ, α, B, and the stability threshold. |
 | 52 | Filter statistics | Fⱼ = MS_between,ⱼ / MS_within,ⱼ; MI(Xⱼ;Y) = Σₓ,ᵧ p(x,y) ln[p(x,y) / (p(x)p(y))] |
 | 53 | Pearson association | rⱼ = cov(Xⱼ, Y) / (σXⱼ σY) |
 | 54 | Correlation matrix | rₐᵦ = Σᵢ(aᵢ − ā)(bᵢ − b̄) / √[Σᵢ(aᵢ − ā)² Σᵢ(bᵢ − b̄)²] |
 | 55 | Permutation importance | PIⱼ = M_base − M_perm(j) |
 | 56 | Mutual information worked example | MI(X;Y) = Σₓ,ᵧ p(x,y) ln[p(x,y) / (p(x)p(y))] = 0.193 nats for the displayed table |
-| 57 | Recursive feature elimination | S* = argmaxₖ CVScore(RFEₖ(X), y) |
-| 58 | Lasso selection | β̂(λ) = argminβ { −ℓ(β) + λΣⱼ|βⱼ| } |
+| 57 | Recursive feature elimination | S* = argmaxₖ CVScore(RFEₖ(X), y); important parameters include cv, scoring, step, and minimum features |
+| 58 | Lasso selection | β̂(λ) = argminβ { −ℓ(β) + λΣⱼ|βⱼ| }; C = 1/λ in scikit-learn |
 | 59 | Elastic Net | minimize −ℓ(β₀, β) + λ[α‖β‖₁ + (1−α)(1/2)‖β‖₂²] |
 | 60 | Regularisation strength in scikit-learn | C = 1 / λ |
 | 61 | Leakage-safe selection pipeline | Fit preprocessing, selected columns, and model on the training fold; apply the frozen route to validation data |
-| 62 | Stability selection | πⱼ = (1 / B) Σᵦ₌₁ᴮ 𝟙(j ∈ Sᵦ); for [1,1,1,1,0], πⱼ = 4/5 = 0.80 |
+| 62 | Stability selection | πⱼ = (1 / B) Σᵦ₌₁ᴮ 𝟙(j ∈ Sᵦ); SE(πⱼ) ≈ √[πⱼ(1−πⱼ)/B]; for [1,1,1,1,0], πⱼ = 4/5 = 0.80 |
 | 64 | Monthly variable distribution | pⱼ,ₘ = count(bin j in month m) / count(non-missing variable in month m) |
 | 65 | Monthly categorical distribution | pₖ,ₘ = count(category k in month m) / count(non-missing category in month m) |
-| 66 | Monthly target rate | DRₘ = Dₘ / Nₘ, where Dₘ is the number of defaults and Nₘ is the eligible resolved-loan denominator |
+| 66 | Monthly target rate and jump | BRₘ = Bₘ / Nₘ; SE(BRₘ) ≈ √[BRₘ(1−BRₘ)/Nₘ]; ΔBR = BRₜ − BRₜ₋₁ |
 | 67 | PSI contribution | PSIⱼ = (qⱼ − pⱼ) × ln(qⱼ / pⱼ), and PSI = Σⱼ PSIⱼ |
 | 68 | PSI code | The code implements the same bin-level sum with a small epsilon for zero shares |
 | 83 | Decision-tree split | G_split(θ) = (n_L(θ) / n_t)G(Lθ) + (n_R(θ) / n_t)G(Rθ); θ* = argminθ G_split(θ) |
@@ -45,6 +46,36 @@ The presentation uses editable native text for these equations. This reference u
 | 87 | Information Coefficient and model Gini | ICₜ = ρₛ(ŝᵢ,ₜ, rᵢ,ₜ₊₁) = corr(rank(ŝᵢ,ₜ), rank(rᵢ,ₜ₊₁)); Gini_model = 2 × AUC − 1 |
 
 ## Worked calculations
+
+### Target-driven event and bad-rate jump
+
+Let Bₜ be the number of bad outcomes observed for period t and Nₜ be the eligible target population whose outcome window is mature. The observed bad rate is:
+
+BRₜ = Bₜ / Nₜ
+
+The period-to-period jump is:
+
+ΔBRₜ = BRₜ − BRₜ₋₁
+
+The relative change is:
+
+Relative changeₜ = (BRₜ − BRₜ₋₁) / BRₜ₋₁
+
+For a simple binomial teaching approximation, the standard error is:
+
+SE(BRₜ) ≈ √[BRₜ(1−BRₜ) / Nₜ]
+
+and an approximate 95% interval is BRₜ ± 1.96SE(BRₜ). This approximation is useful for intuition; clustered borrowers, overlapping outcome windows, censoring, and model monitoring policies may require a different uncertainty treatment.
+
+In the LendingClub example on Slide 66, the labelled jump from 2011-11 to 2011-12 is:
+
+BR₍₂₀₁₁₋₁₁₎ = 16.2%,   BR₍₂₀₁₁₋₁₂₎ = 20.7%
+
+ΔBR = 20.7% − 16.2% = 4.5 percentage points
+
+Relative change = 4.5% / 16.2% = 27.5%
+
+The jump is target-driven because the eventual outcome is observed after the loan outcome window. A financial crisis, pandemic, war, energy shock, policy change, or reporting change can define a candidate event window for investigation. A coincident jump is evidence for a monitoring question, not proof of a causal effect.
 
 ### Feature selection objective
 

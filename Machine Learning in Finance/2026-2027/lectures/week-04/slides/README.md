@@ -29,6 +29,7 @@ The deck is an editable PowerPoint file. Text, tables, charts, code examples, an
 - Wrapper selection: scikit-learn, [Recursive feature elimination with cross-validation](https://scikit-learn.org/stable/auto_examples/feature_selection/plot_rfe_with_cross_validation.html).
 - Correlated-feature importance: scikit-learn, [Permutation importance with multicollinear features](https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance_multicollinear.html).
 - Lasso model selection: scikit-learn, [Lasso model selection](https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html).
+- Target-driven event context: Board of Governors of the Federal Reserve System, [Delinquency Rate on Credit Card Loans, All Commercial Banks](https://fred.stlouisfed.org/series/DRCCLACBS), retrieved through FRED.
 
 The figures are embedded as image assets in the deck for visual explanation. The surrounding mathematics, tables, plots, and code remain editable native PowerPoint content. The external figures are used only where they clarify an algorithmic or mathematical idea; the course’s financial plots remain native charts from the documented teaching data.
 
