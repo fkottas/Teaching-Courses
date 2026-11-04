@@ -42,9 +42,13 @@ The sequence now follows a decision route:
 
 Each family has its own question, output, parameter choices, and limitation. Selection is explicitly kept inside the validation pipeline.
 
+The latest presenter-readiness pass adds a decision-to-metric/model map on slide 42, a numerical `MS_between`/`MS_within` calculation on slide 44, step-by-step validation perturbation and RFE examples on slides 48–49, an editable five-fold matrix on slide 50, and a separate illustrative model/metric comparison on slide 57. These changes make the selection route teachable without asking the presenter to infer missing steps.
+
 ### Stability and PSI — Slides 59–72
 
 The deck separates numeric-bin distributions, categorical shares, target-rate time series, relationship stability, and operational stability. The target slide uses a connected line with a labelled point for every month and keeps the denominator beside the jump. The PSI code shows both fixed-bin variable monitoring and delayed two-category target monitoring.
+
+Slide 65 was rebuilt as a light editorial monitoring slide rather than a dark screenshot-like chart. The chart is a native editable line chart with one labelled dot per month; the adjacent panels show the November and December numerator/denominator calculation, the +4.5 percentage-point change, and the investigation questions.
 
 ### Binning, Gini, WOE, and IV — Slides 73–83
 
@@ -76,7 +80,7 @@ The final generated deck was checked as follows:
 - PowerPoint package integrity: passed, 0 findings.
 - Layout and heading/bullet geometry: passed, 0 findings and 0 warnings.
 - Native charts: 13 charts validated; native quantitative-chart gate passed.
-- Native tables: 39 tables present; arithmetic check passed for the worked IV table.
+- Native tables: 43 tables present; arithmetic check passed for the worked IV table.
 - First-party artifact-tool import: passed, 90 slides.
 - Approved fonts: Arial and Courier New only.
 - Mathematics-reference scan: clean; the GitHub reference uses readable Unicode/plain text and does not require unsupported LaTeX control sequences or environments. The deck’s equation images were rendered separately and visually inspected on the feature-selection, regularisation, PSI, Gini, WOE, and IV slides.

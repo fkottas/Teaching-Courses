@@ -40,5 +40,7 @@ The deck was rebuilt after a full rendered-slide assessment. The selection seque
 
 The presentation uses the unambiguous identity `log1p(xᵢ) = ln(1 + xᵢ)` and explicitly rejects the incorrect expression `log(xᵢ) = xᵢ + 1`. The regularisation slides pair high-resolution typeset equations with official scikit-learn coefficient-path visuals, symbol definitions, and numerical substitutions. Text, tables, code, and course-generated charts are native PowerPoint content; external figures and equation visuals are embedded only where they improve mathematical readability.
 
+The latest revision also makes the selection and stability route presenter-ready: slide 42 maps decisions to metrics and candidate models; slide 44 works through `MS_between` and `MS_within` with utilization values; slides 48–49 show concrete permutation-importance and RFE steps; slide 50 uses an editable colored cross-validation fold matrix; slide 57 compares illustrative model/metric outcomes without duplicating the fold explanation; and slide 65 presents the monthly target-rate series with the actual November and December denominators.
+
 See the [full visual and teaching redesign assessment](../reference/quality_assessment_redesign.md) and the [editable mathematics reference](../reference/mathematics_to_insert.md).
 
