@@ -21,6 +21,7 @@
 | Derived teaching sample | 1,000 rows derived from the complete UCI data; useful for quick inspection | [Download CSV](data/credit_feature_engineering_sample.csv) |
 | Feature dictionary | Compact field-by-field definition for the derived sample | [Read the dictionary](reference/feature_dictionary.md) |
 | Mathematics reference | Editable, plain-text formulas and the slide locations where they belong | [Read the mathematics reference](reference/mathematics_to_insert.md) |
+| Quality assessment | Slide-by-slide assessment and redesign rationale for the feature-selection, target-rate, monitoring, and logarithm sections | [Read the assessment](reference/quality_assessment_before_redesign.md) |
 | Weekly assignment | Submission requirements and analytical questions | [Read the assignment](assignment/README.md) |
 
 ## Learning route

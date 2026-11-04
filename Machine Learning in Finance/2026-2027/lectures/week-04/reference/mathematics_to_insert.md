@@ -9,7 +9,7 @@ The presentation uses editable native text for these equations. This reference u
 | 18 | Utilization | utilizationᵢ = BILL_AMT1ᵢ / LIMIT_BALᵢ, when LIMIT_BALᵢ ≠ 0 |
 | 21 | Payment capacity | payment_to_billᵢ = total_paid_6mᵢ / total_bill_6mᵢ, when total_bill_6mᵢ ≠ 0 |
 | 27 | Change | Δxₜ = xₜ − xₜ₋₁ |
-| 29 | Log transformation | log_limitᵢ = ln(1 + LIMIT_BALᵢ) |
+| 29 | Log transformation | log1p(xᵢ) = ln(1 + xᵢ); `log_limitᵢ = log1p(LIMIT_BALᵢ)` |
 | 30 | Signed log | signed_log(x) = sign(x) × ln(1 + |x|) |
 | 31 | Standardisation | zᵢ = (xᵢ − μ_train) / σ_train |
 | 33 | Lag | lag₁(xₜ) = xₜ₋₁ |
@@ -21,14 +21,14 @@ The presentation uses editable native text for these equations. This reference u
 | 45 | Binning | bin(x) = j when bⱼ ≤ x < bⱼ₊₁ |
 | 47 | Conceptual WOE | WOEⱼ = ln(good share in bin j / bad share in bin j) |
 | 12 | Target-driven event | BRₜ = Bₜ / Nₜ; ΔBRₜ = BRₜ − BRₜ₋₁ |
-| 50 | Selection objective | S* = argmax over S ⊆ {1, …, p} of E_CV[Score(model(X_S), y)] |
-| 51 | Selection families and parameters | Filter: scoreⱼ = T(Xⱼ, y); wrapper: S* = argmaxₛ CVScore(S); embedded: minβ L(β) + λP(β); stability: πⱼ = (1/B)Σᵦ 𝟙(j ∈ Sᵦ). Parameters include k, cv, scoring, step, C = 1/λ, α, B, and the stability threshold. |
-| 52 | Filter statistics | Fⱼ = MS_between,ⱼ / MS_within,ⱼ; MI(Xⱼ;Y) = Σₓ,ᵧ p(x,y) ln[p(x,y) / (p(x)p(y))] |
+| 50 | Selection objective | S* = argmax over S ⊆ {1, …, p} of CVScore(model(X_S), y) |
+| 51 | Selection families | Filter asks whether Xⱼ relates to y alone; wrapper asks whether a subset improves a fitted model; embedded selects inside the fitted objective; stability records persistence under resampling. |
+| 52 | F-test filter | Fⱼ = MS_between / MS_within; both quantities are calculated for Xⱼ after grouping observations by Y. |
 | 53 | Pearson association | rⱼ = cov(Xⱼ, Y) / (σXⱼ σY) |
 | 54 | Correlation matrix | rₐᵦ = Σᵢ(aᵢ − ā)(bᵢ − b̄) / √[Σᵢ(aᵢ − ā)² Σᵢ(bᵢ − b̄)²] |
 | 55 | Permutation importance | PIⱼ = M_base − M_perm(j) |
 | 56 | Mutual information worked example | MI(X;Y) = Σₓ,ᵧ p(x,y) ln[p(x,y) / (p(x)p(y))] = 0.193 nats for the displayed table |
-| 57 | Recursive feature elimination | S* = argmaxₖ CVScore(RFEₖ(X), y); important parameters include cv, scoring, step, and minimum features |
+| 57 | Recursive feature elimination | S* = argmaxₖ CVScore(Sₖ); Sₖ is the subset retained at step k; important parameters include cv, scoring, step, and minimum features |
 | 58 | Lasso selection | β̂(λ) = argminβ { −ℓ(β) + λΣⱼ|βⱼ| }; C = 1/λ in scikit-learn |
 | 59 | Elastic Net | minimize −ℓ(β₀, β) + λ[α‖β‖₁ + (1−α)(1/2)‖β‖₂²] |
 | 60 | Regularisation strength in scikit-learn | C = 1 / λ |
@@ -36,7 +36,7 @@ The presentation uses editable native text for these equations. This reference u
 | 62 | Stability selection | πⱼ = (1 / B) Σᵦ₌₁ᴮ 𝟙(j ∈ Sᵦ); SE(πⱼ) ≈ √[πⱼ(1−πⱼ)/B]; for [1,1,1,1,0], πⱼ = 4/5 = 0.80 |
 | 64 | Monthly variable distribution | pⱼ,ₘ = count(bin j in month m) / count(non-missing variable in month m) |
 | 65 | Monthly categorical distribution | pₖ,ₘ = count(category k in month m) / count(non-missing category in month m) |
-| 66 | Monthly target rate and jump | BRₘ = Bₘ / Nₘ; SE(BRₘ) ≈ √[BRₘ(1−BRₘ)/Nₘ]; ΔBR = BRₜ − BRₜ₋₁ |
+| 66 | Monthly target rate and jump | BRₘ = Bₘ / Nₘ; ΔBRₘ = BRₘ − BRₘ₋₁; SE(BRₘ) ≈ √[BRₘ(1−BRₘ)/Nₘ] |
 | 67 | PSI contribution | PSIⱼ = (qⱼ − pⱼ) × ln(qⱼ / pⱼ), and PSI = Σⱼ PSIⱼ |
 | 68 | PSI code | The code implements the same bin-level sum with a small epsilon for zero shares |
 | 83 | Decision-tree split | G_split(θ) = (n_L(θ) / n_t)G(Lθ) + (n_R(θ) / n_t)G(Rθ); θ* = argminθ G_split(θ) |
@@ -46,6 +46,20 @@ The presentation uses editable native text for these equations. This reference u
 | 87 | Information Coefficient and model Gini | ICₜ = ρₛ(ŝᵢ,ₜ, rᵢ,ₜ₊₁) = corr(rank(ŝᵢ,ₜ), rank(rᵢ,ₜ₊₁)); Gini_model = 2 × AUC − 1 |
 
 ## Worked calculations
+
+### Log transformation notation
+
+The notation used in the code is:
+
+log1p(xᵢ) = ln(1 + xᵢ)
+
+It is not `log(xᵢ) = xᵢ + 1`. For a real-valued natural logarithm, xᵢ must be greater than −1. For a non-negative monetary amount, the condition is automatically satisfied. The worked values on Slide 29 are:
+
+log1p(0) = ln(1) = 0
+
+log1p(99) = ln(100) ≈ 4.605
+
+In Python, use `np.log1p(x)`. The transformation compresses the right tail while preserving zero; it changes the scale and therefore the interpretation of a model coefficient.
 
 ### Target-driven event and bad-rate jump
 

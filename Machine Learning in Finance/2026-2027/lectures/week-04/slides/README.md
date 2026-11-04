@@ -33,3 +33,9 @@ The deck is an editable PowerPoint file. Text, tables, charts, code examples, an
 
 The figures are embedded as image assets in the deck for visual explanation. The surrounding mathematics, tables, plots, and code remain editable native PowerPoint content. The external figures are used only where they clarify an algorithmic or mathematical idea; the course’s financial plots remain native charts from the documented teaching data.
 
+## Quality and editability note
+
+The selection sequence was rebuilt after a slide-by-slide quality assessment. The four families are now introduced as separate questions, then explained with their own equation, parameter meaning, numerical example, and limitation. Slide 66 is chart-led so the labelled target-rate jump and its denominator are read together. Slide 70 uses separate input and target monitoring lanes with a label-maturity boundary. The logarithm example uses the unambiguous identity `log1p(xᵢ) = ln(1 + xᵢ)` and explicitly rejects the incorrect expression `log(xᵢ) = xᵢ + 1`.
+
+The assessment is available at [quality assessment before redesign](../reference/quality_assessment_before_redesign.md). It records the original findings and the design decisions used for this version.
+
