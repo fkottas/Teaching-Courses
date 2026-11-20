@@ -2,7 +2,7 @@
 
 This is the mathematics reference for the single canonical 96-slide Week 5 deck. It follows the same convention as the previous lecture: a formula map, plain Unicode equations, a symbol glossary, worked numerical examples, and interpretation rules.
 
-The equations are deliberately written in plain text and Unicode. They do not use LaTeX delimiters, left/right commands, operatorname macros, or Markdown link syntax inside formulas. They therefore remain readable on GitHub, in a downloaded Markdown file, and in Colab.
+The equations are deliberately written in plain text and Unicode. They do not use LaTeX delimiters, paired delimiter commands, or Markdown link syntax inside formulas. They therefore remain readable on GitHub, in a downloaded Markdown file, and in Colab.
 
 ## Formula map
 
@@ -15,7 +15,7 @@ The equations are deliberately written in plain text and Unicode. They do not us
 | 28 | PCA explained variance | EVRₖ = λₖ / Σᵣ λᵣ; cumulative EVR(K) = Σₖ₌₁ᴷ EVRₖ. |
 | 30 | K-means assignment | Assign observation i to the centroid μₖ with the smallest distance d(xᵢ, μₖ). |
 | 30 | K-means centroid | μₖ = (1/nₖ) × Σᵢ assigned to k xᵢ. |
-| 31 | K-means objective | Inertia I = Σₖ₌₁ᴷ Σᵢ assigned to k ||xᵢ − μₖ||². |
+| 31 | K-means objective | Inertia I = Σₖ₌₁ᴷ Σᵢ assigned to k distance_squared(xᵢ, μₖ). |
 | 33 | Reinforcement learning value | Q(S,A) = expected discounted reward after taking action A in state S. |
 | 33 | Bellman target | Q(S,A) ← R + γ × max over A′ Q(S′,A′). |
 | 41 | Information boundary | feature event_time ≤ prediction_time; future information is excluded. |
