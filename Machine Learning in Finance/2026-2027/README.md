@@ -29,4 +29,4 @@ Use Google Colab for the laboratories. Run notebooks from top to bottom, keep th
 
 ## Weekly status
 
-Lecture 0–1, Lecture 2, and Lecture 3 are published. Week 3 includes the editable PPTX, executed Colab notebook, local Python script, complete UCI data guide, assignment, and separately rendered mathematics guide. The remaining weeks will be released one complete lecture package at a time.
+Lectures 0–1 through 5 are published. Week 5 includes the editable 96-slide PPTX, runnable Colab notebook, synthetic credit sample, mathematics reference, figure credits, and assignment. The later weeks will be released one complete lecture package at a time.
