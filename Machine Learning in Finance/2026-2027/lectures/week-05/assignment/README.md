@@ -4,6 +4,13 @@
 
 Build a probability-of-default baseline using the supplied notebook and sample.
 
+Start with:
+
+- [Week 5 student page](../README.md)
+- [Open the notebook](../notebooks/lecture_05_introduction_to_machine_learning_and_logistic_regression_finance.ipynb)
+- [Download the sample data](../data/credit_ml_sample.csv)
+- [Read the mathematics reference](../reference/mathematics.md)
+
 ## Required evidence
 
 1. Define one row, the positive event, the outcome horizon, and the information cutoff.

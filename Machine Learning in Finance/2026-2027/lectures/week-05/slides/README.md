@@ -1,22 +1,19 @@
-# Week 5 PowerPoint
+# Week 5 presentation
 
-**Lecture date:** 25 November 2026 · 15:00–18:00 Greece time (Europe/Athens)  
-**File:** Lecture_05_Introduction_to_Machine_Learning_and_Logistic_Regression_2026-2027.pptx
+**Lecture date:** 25 November 2026 · 15:00–18:00 Greece time (Europe/Athens)
 
-This is a native 16:9 PowerPoint deck with 96 slides.
+Download the single current deck:
 
-The deck contains native editable text, tables, charts, and code blocks. Equations are embedded as high-resolution image objects to preserve correct mathematical typography and avoid broken delimiter and macro errors. Their corrected source is available in reference/mathematics.md.
+[Open the editable PPTX](Lecture_05_Introduction_to_Machine_Learning_and_Logistic_Regression_2026-2027.pptx)
 
-The deck is intentionally limited to:
+Supporting links:
 
-- machine-learning foundations;
-- machine learning versus econometrics;
-- supervised, unsupervised, and reinforcement learning as a conceptual map;
-- generalisation and the train/validation/test boundary;
-- underfitting, overfitting, bias, variance, and the bias–variance decomposition;
-- logistic regression, likelihood, log-loss, gradient descent, regularisation, coefficient interpretation, calibration, and threshold policy;
-- a notebook and assessment route.
+- [Week 5 student page](../README.md)
+- [Mathematics reference](../reference/mathematics.md)
+- [Figure credits](../reference/attributions.md)
+- [Colab notebook](../notebooks/lecture_05_introduction_to_machine_learning_and_logistic_regression_finance.ipynb)
+- [Weekly assignment](../assignment/README.md)
 
-The worked demonstrations are completed in the deck. The only unsolved component is the final Week 5 assignment.
+The deck is a native 16:9 PowerPoint file with 96 slides. Explanatory text, tables, charts, and code blocks remain native editable objects. Equations are high-resolution typeset visuals; the copyable and GitHub-safe versions are in the mathematics reference.
 
-The detailed material for trees, metrics, validation, boosting, alternative algorithms, explainability, and neural networks is assigned to later weeks.
+The route covers machine-learning foundations, econometrics versus prediction, the three learning families, generalisation, train/validation/test boundaries, underfitting and overfitting, bias–variance, logistic regression, likelihood, log-loss, gradient descent, Ridge/LASSO/Elastic Net, calibration, coefficient interpretation, and threshold policy.

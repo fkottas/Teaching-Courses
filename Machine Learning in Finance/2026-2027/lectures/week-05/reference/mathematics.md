@@ -1,212 +1,232 @@
 # Week 5 mathematics reference
 
-This file is the text source for the equations used in the Week 5 deck. Every symbol is defined before it is used. The display equations use standard GitHub-compatible LaTeX: delimiters are balanced and only widely supported commands are used.
+This is the copyable mathematics reference for the 96-slide Week 5 deck. It intentionally uses plain Unicode notation rather than fragile LaTeX commands. GitHub will therefore display the equations as written, without interpreting unmatched delimiters, unsupported macros, or square brackets as links.
 
-## Notation
+## Formula map
 
-- \(i=1,\ldots,n\) indexes observations.
-- \(j=1,\ldots,p\) indexes features.
-- \(x_i=(x_{i1},\ldots,x_{ip})^\mathsf{T}\) is the feature vector for observation \(i\).
-- \(y_i\in\{0,1\}\) is the observed binary label; \(y_i=1\) is the event being modelled.
-- \(\beta_0\) is the intercept and \(\boldsymbol{\beta}=(\beta_1,\ldots,\beta_p)^\mathsf{T}\) contains feature coefficients.
-- \(\eta_i\) is the linear score and \(p_i\) is the predicted probability of the event \(Y_i=1\).
+| Concept | GitHub-safe formula |
+|---|---|
+| Prediction objective | f̂ = arg min over f∈F of (1/n_train) × Σᵢ∈train L(yᵢ, f(xᵢ)) |
+| Logistic score | ηᵢ = β₀ + xᵢᵀβ = β₀ + Σⱼ₌₁ᵖ βⱼxᵢⱼ |
+| Sigmoid probability | pᵢ = P(Yᵢ = 1 \| xᵢ) = 1 / [1 + exp(−ηᵢ)] |
+| Odds | oddsᵢ = pᵢ / (1 − pᵢ) = exp(ηᵢ) |
+| Log-odds | ln[pᵢ / (1 − pᵢ)] = ηᵢ = β₀ + xᵢᵀβ |
+| Likelihood | L(β₀,β) = Πᵢ₌₁ⁿ pᵢʸⁱ (1 − pᵢ)¹⁻ʸⁱ |
+| Log-likelihood | ℓ(β₀,β) = Σᵢ₌₁ⁿ [yᵢ ln(pᵢ) + (1−yᵢ) ln(1−pᵢ)] |
+| Binary log-loss | J(β₀,β) = −(1/n) × Σᵢ₌₁ⁿ [yᵢ ln(pᵢ) + (1−yᵢ) ln(1−pᵢ)] |
+| Gradient | ∇βJ = (1/n) × Xᵀ(p − y) |
+| One-feature gradient | ∂J/∂βⱼ = (1/n) × Σᵢ₌₁ⁿ (pᵢ − yᵢ)xᵢⱼ |
+| Gradient update | β⁽ᵗ⁺¹⁾ = β⁽ᵗ⁾ − a × ∇βJ(β⁽ᵗ⁾) |
+| Threshold rule | ŷᵢ(c) = 1 if pᵢ ≥ c; otherwise ŷᵢ(c) = 0 |
+| Ridge objective | J_Ridge = J + λ × Σⱼ₌₁ᵖ βⱼ² |
+| LASSO objective | J_LASSO = J + λ × Σⱼ₌₁ᵖ abs(βⱼ) |
+| Elastic Net objective | J_EN = J + λ [ α × Σⱼ₌₁ᵖ abs(βⱼ) + (1−α) × (1/2) × Σⱼ₌₁ᵖ βⱼ² ] |
+| Weighted log-loss | J_w = −(1/n) × Σᵢ₌₁ⁿ wᵧᵢ [yᵢ ln(pᵢ) + (1−yᵢ) ln(1−pᵢ)] |
 
-## A prediction objective
+## Notation and symbols
 
-For a candidate function \(f\) and a one-row loss \(L\), supervised learning chooses a function that performs well on the training sample:
+| Symbol | Meaning |
+|---|---|
+| i = 1,…,n | Observation index; n is the number of rows. |
+| j = 1,…,p | Feature index; p is the number of input variables. |
+| xᵢ | Feature vector for observation i. |
+| xᵢⱼ | Value of feature j for observation i. |
+| yᵢ ∈ {0,1} | Observed binary label; yᵢ = 1 is the event being modelled. |
+| β₀ | Intercept; baseline log-odds before feature contributions. |
+| β | Vector of feature coefficients (β₁,…,βₚ). |
+| βⱼ | Coefficient for feature j, holding other features fixed. |
+| ηᵢ | Linear score before the sigmoid transformation. |
+| pᵢ | Predicted probability P(Yᵢ = 1 \| xᵢ), between 0 and 1. |
+| σ(·) | Sigmoid function, σ(η) = 1/[1 + exp(−η)]. |
+| exp(·) | Exponential function; exp(z) = eᶻ. |
+| ln(·) | Natural logarithm. |
+| L | Likelihood of the observed labels under the candidate coefficients. |
+| ℓ | Log-likelihood; maximised during maximum-likelihood fitting. |
+| J | Average loss being minimised. |
+| X | Feature matrix; each row is one observation. |
+| a | Learning rate in gradient descent. |
+| c | Decision threshold applied after probabilities are estimated. |
+| λ ≥ 0 | Overall regularisation strength. Larger λ applies a stronger penalty. |
+| α ∈ [0,1] | Elastic Net mixture; α = 1 is LASSO and α = 0 is Ridge. |
+| w₀, w₁ | Class weights for non-events and events. |
+| F | Candidate model class in the prediction objective. |
 
-$$
-\widehat f \in \arg\min_{f\in\mathcal F}
-\frac{1}{n_{\mathrm{train}}}
-\sum_{i\in\mathrm{train}} L\bigl(y_i,f(x_i)\bigr).
-$$
+The intercept β₀ is normally excluded from Ridge, LASSO, and Elastic Net penalties because it calibrates the baseline event rate.
 
-Here \(\mathcal F\) is the candidate model class, \(n_{\mathrm{train}}\) is the number of training rows, and \(L\) measures the cost of a prediction error. The validation design estimates whether the fitted rule generalises beyond the rows used to fit it.
+## 1. Prediction objective
 
-## Logistic score and sigmoid
+Supervised learning chooses a function that performs well on the training sample:
 
-The score is linear in the features:
+~~~text
+f̂ = arg min over f∈F of
+(1/n_train) × Σᵢ∈train L(yᵢ, f(xᵢ))
+~~~
 
-$$
-\eta_i=\beta_0+x_i^\mathsf{T}\boldsymbol{\beta}
-=\beta_0+\sum_{j=1}^{p}\beta_jx_{ij}.
-$$
+F is the candidate model class and L is the one-row loss. The training sample fits the rule. Validation estimates generalisation and helps choose hyperparameters. The final test sample is used only after those choices are frozen.
 
-The sigmoid maps every real score to a number between zero and one:
+## 2. Logistic score and sigmoid
 
-$$
-p_i=\Pr(Y_i=1\mid x_i)
-=\sigma(\eta_i)
-=\frac{1}{1+\exp(-\eta_i)}.
-$$
+The score is linear in the input features:
 
-The score is not yet a probability. The sigmoid is the link that turns the score into a probability:
+~~~text
+ηᵢ = β₀ + xᵢᵀβ
+   = β₀ + Σⱼ₌₁ᵖ βⱼxᵢⱼ
+~~~
 
-- if \(\eta_i=0\), then \(p_i=0.5\);
-- if \(\eta_i\) increases, \(p_i\) increases;
-- as \(\eta_i\to-\infty\), \(p_i\to0\);
-- as \(\eta_i\to+\infty\), \(p_i\to1\).
+The sigmoid converts every real score into a probability:
 
-For example, \(\eta=0.40\) gives \(p=1/(1+\exp(-0.40))\approx0.599\). A score of \(-1.10\) gives \(p\approx0.250\).
+~~~text
+pᵢ = P(Yᵢ = 1 | xᵢ)
+   = 1 / [1 + exp(−ηᵢ)]
+~~~
 
-## Odds and log-odds
+Checks:
 
-The odds compare the event probability with the non-event probability:
+- If ηᵢ = 0, then pᵢ = 0.500.
+- If ηᵢ increases, pᵢ increases.
+- If ηᵢ tends to negative infinity, pᵢ tends to 0.
+- If ηᵢ tends to positive infinity, pᵢ tends to 1.
 
-$$
-\mathrm{odds}_i=\frac{p_i}{1-p_i}=\exp(\eta_i).
-$$
+Numerical example: if η = 0.40, then p = 1/[1 + exp(−0.40)] ≈ 0.599. If η = −1.10, then p ≈ 0.250.
 
-Taking the natural logarithm gives the linear log-odds relation:
+## 3. Odds and coefficient interpretation
 
-$$
-\log\bigl(\frac{p_i}{1-p_i}\bigr)
-=\eta_i
-=\beta_0+x_i^\mathsf{T}\boldsymbol{\beta}.
-$$
+Odds compare the event probability with the non-event probability:
 
-Holding other features fixed, a one-unit increase in \(x_{ij}\) changes the odds by the multiplier \(\exp(\beta_j)\). It does not change the probability by a constant number of percentage points because the sigmoid is nonlinear. If \(\beta_j=0.40\), then \(\exp(0.40)\approx1.49\): the odds are multiplied by about 1.49.
+~~~text
+oddsᵢ = pᵢ / (1 − pᵢ) = exp(ηᵢ)
+ln[ pᵢ / (1 − pᵢ) ] = ηᵢ
+~~~
 
-## Likelihood and log-likelihood
+Holding all other features fixed, a one-unit increase in xᵢⱼ multiplies the odds by exp(βⱼ). It does not add a constant number of percentage points to pᵢ because the sigmoid is nonlinear.
 
-For a binary label, the Bernoulli likelihood contribution of row \(i\) can be written in one expression:
+If βⱼ = 0.40:
 
-$$
-\mathcal L(\beta_0,\boldsymbol{\beta})
-=\prod_{i=1}^{n}
-p_i^{y_i}(1-p_i)^{1-y_i}.
-$$
+~~~text
+exp(βⱼ) = exp(0.40) ≈ 1.49
+~~~
 
-If \(y_i=1\), the contribution is \(p_i\); if \(y_i=0\), the contribution is \(1-p_i\). Under the usual independent-row assumption, the likelihood multiplies the row contributions.
+The odds are multiplied by approximately 1.49, or increase by approximately 49%. The probability change depends on the starting probability.
 
-The log-likelihood is easier to optimise:
+## 4. Likelihood and log-likelihood
 
-$$
-\ell(\beta_0,\boldsymbol{\beta})
-=\sum_{i=1}^{n}
-\bigl[
-y_i\log(p_i)+(1-y_i)\log(1-p_i)
-\bigr].
-$$
+For a binary label, the likelihood multiplies the probability assigned to the observed outcome in every row:
 
-Maximum likelihood chooses the coefficients that maximise \(\ell\). Equivalently, training minimises the negative average log-likelihood.
+~~~text
+L(β₀,β) = Πᵢ₌₁ⁿ pᵢʸⁱ (1 − pᵢ)¹⁻ʸⁱ
+~~~
 
-## Binary log-loss
+If yᵢ = 1, the row contribution is pᵢ. If yᵢ = 0, the row contribution is 1 − pᵢ. Taking logs turns the product into a sum:
 
-The negative average log-likelihood is the binary cross-entropy or log-loss:
+~~~text
+ℓ(β₀,β) = Σᵢ₌₁ⁿ [ yᵢ ln(pᵢ) + (1−yᵢ) ln(1−pᵢ) ]
+~~~
 
-$$
-J(\beta_0,\boldsymbol{\beta})
-=-\frac{1}{n}\sum_{i=1}^{n}
-\bigl[
-y_i\log(p_i)+(1-y_i)\log(1-p_i)
-\bigr].
-$$
+Maximum likelihood chooses the coefficients that maximise ℓ. Equivalently, logistic training minimises the negative average log-likelihood.
+
+## 5. Binary log-loss
+
+The objective being minimised is:
+
+~~~text
+J(β₀,β) = −(1/n) × Σᵢ₌₁ⁿ
+           [ yᵢ ln(pᵢ) + (1−yᵢ) ln(1−pᵢ) ]
+~~~
 
 For one row:
 
-- \(y_i=1\) gives loss \(-\log(p_i)\);
-- \(y_i=0\) gives loss \(-\log(1-p_i)\).
+- when yᵢ = 1, loss = −ln(pᵢ);
+- when yᵢ = 0, loss = −ln(1−pᵢ).
 
-If \(y_i=1\) and \(p_i=0.90\), the contribution is \(-\log(0.90)\approx0.105\). If \(y_i=1\) and \(p_i=0.10\), the contribution is \(-\log(0.10)\approx2.303\). A confident mistake is therefore much more costly than a cautious mistake.
+Example for a positive event:
 
-## Gradient and gradient descent
+~~~text
+If y = 1 and p = 0.90: loss = −ln(0.90) ≈ 0.105
+If y = 1 and p = 0.10: loss = −ln(0.10) ≈ 2.303
+~~~
 
-Let \(X\) be the feature matrix, \(\mathbf p\) the vector of predicted probabilities, and \(\mathbf y\) the label vector. For the unregularised average log-loss, the gradient with respect to the feature coefficients is:
+A confident mistake therefore receives a much larger loss than a cautious prediction.
 
-$$
-\nabla_{\boldsymbol{\beta}}J
-=\frac{1}{n}X^\mathsf{T}(\mathbf p-\mathbf y).
-$$
+## 6. Gradient descent
 
-For one feature \(j\):
+Let X be the feature matrix, p the vector of predicted probabilities, and y the vector of observed labels. The gradient of the unregularised average log-loss is:
 
-$$
-\frac{\partial J}{\partial\beta_j}
-=\frac{1}{n}\sum_{i=1}^{n}(p_i-y_i)x_{ij}.
-$$
+~~~text
+∇βJ = (1/n) × Xᵀ(p − y)
+~~~
 
-With learning rate \(a>0\), one gradient step is:
+For one feature j:
 
-$$
-\boldsymbol{\beta}^{(t+1)}
-=\boldsymbol{\beta}^{(t)}
--a\nabla_{\boldsymbol{\beta}}J\bigl(\boldsymbol{\beta}^{(t)}\bigr).
-$$
+~~~text
+∂J/∂βⱼ = (1/n) × Σᵢ₌₁ⁿ (pᵢ − yᵢ)xᵢⱼ
+~~~
 
-If a gradient component is positive, increasing that coefficient currently increases the loss, so the update reduces the coefficient. The learning rate controls step size; it is a hyperparameter, not a fitted coefficient.
+With learning rate a > 0:
 
-## Threshold and decision policy
+~~~text
+β⁽ᵗ⁺¹⁾ = β⁽ᵗ⁾ − a × ∇βJ(β⁽ᵗ⁾)
+~~~
 
-The model first estimates \(p_i\). A policy then converts it to a binary decision at threshold \(c\):
+If a gradient component is positive, increasing that coefficient currently increases the loss, so the update reduces the coefficient. The learning rate is a hyperparameter, not a fitted coefficient.
 
-$$
-\widehat y_i(c)=
-\begin{cases}
-1,&\text{if }p_i\ge c,\\
-0,&\text{if }p_i<c.
-\end{cases}
-$$
+## 7. Threshold and decision policy
 
-Changing \(c\) does not refit \(\beta_0\) or \(\boldsymbol{\beta}\). It changes the number of positive decisions, false positives, false negatives, approval volume, and review volume. The threshold should follow an explicit cost, capacity, or governance rule.
+The model estimates pᵢ first. A separate policy converts the probability into an action:
 
-## Ridge, LASSO, and Elastic Net
+~~~text
+ŷᵢ(c) = 1  if pᵢ ≥ c
+       = 0  if pᵢ < c
+~~~
 
-Let \(J(\beta_0,\boldsymbol{\beta})\) denote the unpenalised logistic loss. The intercept is normally excluded from the penalty because it calibrates the baseline event rate.
+Changing c does not refit β₀ or β. It changes positive decisions, false positives, false negatives, approval volume, and review volume. The threshold must follow an explicit cost, capacity, or governance rule.
 
-Ridge (\(L_2\)) adds a squared-coefficient penalty:
+## 8. Ridge, LASSO, and Elastic Net
 
-$$
-J_{\mathrm{ridge}}(\beta_0,\boldsymbol{\beta})
-=J(\beta_0,\boldsymbol{\beta})
-+\lambda\sum_{j=1}^{p}\beta_j^2.
-$$
+Let J(β₀,β) be the unpenalised logistic loss. The three objectives are:
 
-LASSO (\(L_1\)) adds an absolute-coefficient penalty:
+~~~text
+J_Ridge = J(β₀,β) + λ × Σⱼ₌₁ᵖ βⱼ²
 
-$$
-J_{\mathrm{lasso}}(\beta_0,\boldsymbol{\beta})
-=J(\beta_0,\boldsymbol{\beta})
-+\lambda\sum_{j=1}^{p}\lvert\beta_j\rvert.
-$$
+J_LASSO = J(β₀,β) + λ × Σⱼ₌₁ᵖ |βⱼ|
 
-Elastic Net combines both penalties:
+J_EN = J(β₀,β)
+       + λ [ α × Σⱼ₌₁ᵖ |βⱼ|
+             + (1−α) × (1/2) × Σⱼ₌₁ᵖ βⱼ² ]
+~~~
 
-$$
-J_{\mathrm{EN}}(\beta_0,\boldsymbol{\beta})
-=J(\beta_0,\boldsymbol{\beta})
-+\lambda\bigl[
-\alpha\sum_{j=1}^{p}\lvert\beta_j\rvert
-+(1-\alpha)\frac{1}{2}\sum_{j=1}^{p}\beta_j^2
-\bigr].
-$$
+Interpretation:
 
-Here \(\lambda\ge0\) controls overall penalty strength and \(\alpha\in[0,1]\) controls the mixture. With this convention, \(\alpha=1\) is LASSO and \(\alpha=0\) is Ridge up to the conventional factor of \(1/2\). Ridge usually shrinks correlated coefficients without making them exactly zero. LASSO can set some coefficients exactly to zero, but its selected set can be unstable when predictors are highly correlated. Elastic Net can preserve groups of correlated variables while still removing weak variables.
+- Ridge uses the squared L2 penalty. It shrinks large coefficients smoothly and usually keeps correlated variables together.
+- LASSO uses the absolute L1 penalty. It can make some coefficients exactly zero, so it can perform feature selection.
+- Elastic Net combines both. The L1 part encourages sparsity; the L2 part stabilises correlated predictors.
+- λ controls the total strength of regularisation.
+- α controls the mixture between L1 and L2.
+- β₀ is excluded from all three penalties.
 
-## Class-weighted loss
+### Elastic Net numerical example
 
-If events and non-events have different decision costs, a weighted loss can be used:
+Let β = (0.8, 0.7), λ = 0.10, and α = 0.50:
 
-$$
-J_w(\beta_0,\boldsymbol{\beta})
-=-\frac{1}{n}\sum_{i=1}^{n}w_{y_i}
-\bigl[
-y_i\log(p_i)+(1-y_i)\log(1-p_i)
-\bigr].
-$$
+~~~text
+L1 part       = |0.8| + |0.7| = 1.50
+Squared L2    = 0.8² + 0.7² = 1.13
+Penalty       = 0.10 × [0.50×1.50 + 0.50×(1/2)×1.13]
+               = 0.10325
+~~~
 
-Here \(w_0\) weights non-events and \(w_1\) weights events. Class weighting changes the fitted coefficients. Threshold selection changes the decision rule after fitting. They are different interventions.
+The penalty is added to the unpenalised loss. It is not a separate probability or a separate data column.
 
-## Worked coefficient example
+## 9. Class-weighted loss
 
-Suppose \(\beta_j=0.40\). Then:
+When an event and a non-event have different decision costs, the fitted objective can weight their contributions:
 
-$$
-\exp(\beta_j)=\exp(0.40)\approx1.49.
-$$
+~~~text
+J_w = −(1/n) × Σᵢ₌₁ⁿ wᵧᵢ
+      [ yᵢ ln(pᵢ) + (1−yᵢ) ln(1−pᵢ) ]
+~~~
 
-Holding other features fixed, a one-unit increase in \(x_j\) multiplies the odds by approximately 1.49, or increases the odds by approximately 49%. The probability change depends on the starting score. At \(p=0.10\), the same odds multiplier gives a different percentage-point change than at \(p=0.50\).
+w₀ weights non-events and w₁ weights events. Class weighting changes the fitted coefficients. Threshold selection changes the decision rule after fitting. They are different interventions.
 
 ## Interpretation boundary
 
-The logistic coefficient describes a conditional association inside the fitted model. It is not automatically a causal effect, a stable population relationship, or a guarantee of fairness or profitability. Those claims require separate design, monitoring, and governance evidence.
+A logistic coefficient is a conditional association inside the fitted model. It is not automatically a causal effect, a stable population relationship, a fair decision rule, or a guarantee of profitability. Those claims require separate design, monitoring, and governance evidence.
