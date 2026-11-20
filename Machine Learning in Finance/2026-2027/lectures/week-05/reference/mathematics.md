@@ -178,7 +178,7 @@ J_{\mathrm{EN}}(\beta_0,\boldsymbol{\beta})
 +\lambda\bigl[
 \alpha\sum_{j=1}^{p}\lvert\beta_j\rvert
 +(1-\alpha)\frac{1}{2}\sum_{j=1}^{p}\beta_j^2
-+\bigr].
+\bigr].
 $$
 
 Here \(\lambda\ge0\) controls overall penalty strength and \(\alpha\in[0,1]\) controls the mixture. With this convention, \(\alpha=1\) is LASSO and \(\alpha=0\) is Ridge up to the conventional factor of \(1/2\). Ridge usually shrinks correlated coefficients without making them exactly zero. LASSO can set some coefficients exactly to zero, but its selected set can be unstable when predictors are highly correlated. Elastic Net can preserve groups of correlated variables while still removing weak variables.
